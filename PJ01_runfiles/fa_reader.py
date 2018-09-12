@@ -1,20 +1,30 @@
 # Import the structure of the FA
-import FiniteAutomaton
+from FiniteAutomaton import FA
 
 file_prefix = 'made_up'
 
 # Open the file for reading
 with open(file_prefix+'.fa','r') as f:
-    #TODO: instantiate a version of the FiniteAutomaton, set the accept and transitions vars
-    #TODO: clean this file up s.t. it isn't a pile of print statements.  Write test fns for it
-    #Read the first line as accept states
-    line = f.readline()
-    print("Accept states: ", (line.replace('{','').replace('\n','').replace('}','')).split(','))
-    for line in f:
-        trans = line.split(',')
-        print("Transition:%(line)s     current_state:%(current_state)s    symbol:%(symbol)s    new_state:%(new_state)s"
-                             %{'line':line,'current_state':trans[0],'symbol':trans[1],'new_state':trans[2]})
 
+    #TODO: instantiate a version of the FiniteAutomaton, set the accept and transitions vars
+    fa = FA()
+
+    # Get the fist line, accept states, turn it into a list, and set accept_states in the FA
+    fa.set_accept_states((f.readline()).replace('{','').replace('\n','').replace('}','').split(','))
+
+    #TODO: check that the contents of the transition table are validself
+    #TODO: finish "plant of attack" in sketchpad
+    for line in f:
+        line.replace('\n','')
+        fa.set_transition(tuple(line.split(',')))
+
+
+
+
+
+print("Accept states: %(accept_states)s" % {'accept_states':fa.get_accept_states()}) # correctly
+print("Accept: %(state)s" % {'state':fa.accept_states.pop()}) # member access to states
+print("Transitions: %(trans)s" % {'trans':fa.get_transition_table()})
 
 
 f.close()
