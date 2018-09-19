@@ -48,6 +48,7 @@ class FA:
     from_file           = ''        # which .fa file defined this FA
     states              = set()     # set of states, derived from transition_table
     transition_table    = set()     # transition function tuples from FA file
+    accepted_alphabets  = []        # alphabets accepted by this FA
 
 
 
@@ -145,6 +146,7 @@ class FA:
     # Set the var:states
     def set_states(self):
         for t in self.transition_table:
+            print(self.from_file + str(t))
             self.states.add(t[0])
             self.states.add(t[2])
 
