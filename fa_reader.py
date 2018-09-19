@@ -21,8 +21,10 @@ from finite_automaton import FA  # Import the structure of the FA
 # - Read all FA definition files
 # - Pass strings to each FA to check accept/reject
 class fa_reader:
-    file_prefix = 'made_up'
+    file_prefix = 'm'
     file_suffix = '.fa'
+    file_dir    = 'PJ01_runfiles/'
+    fake_file   = "PJ01_runfiles/made_up.fa"
     fas         = []
 
 
@@ -34,8 +36,14 @@ class fa_reader:
 
 
     # Run logic when fa_reader is created
-    def __init__(self):
-        self.run()
+    def __init__(self,test:int):
+        # self.run() # no longer needed
+        print("Send some FA definition files!")
+        if(test == 1):
+            self.test_run_file(2)
+        else:
+            #TODO: finish run all and call it here
+            print("NEED TO RUN ALL")
 
 
 
@@ -92,7 +100,8 @@ class fa_reader:
                 for line in f:
                     line = line.replace('\n','')    # remove \n from the line
                     line = tuple(line.split(','))   # create a tuple from the line
-                    fa.set_transition(line)         # add the transition to the table
+                    if( len(line) > 1 ):
+                        fa.set_transition(line)         # add the transition to the table
                 # end for line in f
 
                 # Internally process the fa, validate, and set vars
@@ -100,10 +109,10 @@ class fa_reader:
 
         # If the file can't be opened notify
         except PermissionError:
-            print("Couldn't open %(f)s" % {'f':currentFile} )
+            print("Couldn't open %(f)s" % {'f':filename} )
 
         except FileNotFoundError:
-            print("%(f)s doesn't exist!" % {'f':currentFile} )
+            print("%(f)s doesn't exist!" % {'f':filename} )
 
         # If no errors add the FA to the list and close the file
         else:
@@ -148,3 +157,57 @@ class fa_reader:
             return 1
         self.fas[0].print_self()
     # end def run(self)
+
+
+
+
+
+
+
+
+    # def run_file(self)
+    # Purpose:
+    #   - do_file creates an FA and adds it to our list of FAs
+    #   - Check the type on the FA we just appended to the list
+    # Call internally
+    def run_file(self,filename):
+        if self.do_file(filename):
+            return 1
+        if self.fas[ len(self.fas)-1 ].typeCheck_FA():
+            return 1
+        self.fas[ len(self.fas)-1 ].print_self()
+
+    # end def run_file(self,filename)
+
+
+
+
+
+
+
+    # def test_run_file(self):
+    # Purpose: test the run_file(self,filename) function
+    # Try the contrived made_up.fa; then several of the given files
+    # Output:
+    #   TODO: Count of FAs in self.fas = 3
+    #   TODO: Print the alphabets accepted by the FA
+    def test_run_file(self,count:int):
+
+        if( count <= 1):
+            self.run_file(self.fake_file)
+        else:
+            for i in range(count):
+                #build the filename, then run it
+                filename = self.file_dir + self.file_prefix
+                if( i < 10):
+                    filename = filename + str(0) + str(i)
+                else:
+                    filename = filename + str(i)
+                filename = filename + self.file_suffix
+                self.run_file(filename)
+
+        print("CREATED %(n)d FAs\n" % { 'n':len(self.fas) })
+
+
+
+    # end def test_run_file(self)
