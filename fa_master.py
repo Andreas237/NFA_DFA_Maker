@@ -9,20 +9,19 @@ from fa_reader import fa_reader
 # class FA_Master
 # Purpose
 #   TODO: feed all the FA definitions into fa_reader
-#   TODO: keep track of all FAs
 #   TODO: feed input text to each FA
 class FA_Master:
 
     class Bool:
-        FALSE = 0
-        TRUE = 1
+        TEST = 0                                    # Run with limited files, verbose messages
+        PROD = 1                                    # Run with all files, limited messages
 
 
 
 
 
-    mode                    = "TEST"                # TEST means limit to test files, and limited range
-    test_files              = ['made_up.fa']        # test FA definition files
+    mode                    = Bool.TEST             # Default test mode.  Limited files
+    test_file              = ['made_up.fa']         # test FA definition files
     f_range                 = 5                     # number of real definition files to read
 
 
@@ -36,8 +35,8 @@ class FA_Master:
     # Purpose: no need to set init behavior...
     def __init__(self):
         print("It shall be done")
-        print(self.Bool.FALSE)
-        print(self.Bool.TRUE)
+        self.mode = Boole.TEST
+        self.run()
     #end def __init__(self)
 
 
@@ -52,7 +51,7 @@ class FA_Master:
     def read_fa_def_files(self):
         # If test mode:
         #   Create a fa_reader
-        #   Read files in: test_files, and other .fa files up to self.f_range
+        #   Read files in: test_file, and other .fa files up to self.f_range
         if( self.mode == "TEST"):
             fas = fa_reader()
             #TODO: pass the FA a filename.  Need to write that function... fas.
@@ -67,8 +66,37 @@ class FA_Master:
 
 
 
-x = fa_reader()
-x.reset_fas()
-y = FA_Master()
+
+
+    # def run(self)
+    # Purpose:
+    #   Run the class based on the the mode
+    #       IF TEST TRUE
+    #           Use the test functions in fa_reader
+    #       IF TEST FALSE
+    #           #TODO: read the files in the class and and process everything
+    def run(self):
+        fas = fa_reader()
+        print("in fa_master.run()")
+        if(self.mode == Boole.TEST):
+            print("MODE: %(m)s" % {'m':self.mode})
+            fas.test_run_file()
+        elif(Boole.PROD):
+            print("MODE: %(m)s" % {'m':self.mode})
+        else:
+            print("ERROR: No mode selected.  Set in fa_master.__init()__")
+
+
+    # end def run(self):
+
+
+
+
+
+
+
+x = fa_reader(1)
+# x.reset_fas()
+# y = FA_Master()
 
 print("Done")
