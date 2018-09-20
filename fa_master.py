@@ -1,18 +1,25 @@
 import os
-from finite_automaton_c import FA
+from finite_automaton import FA
 
 
 
 
 
 # class FA_Master
-# Purpose
+# Purpose:  fa_master handles directory operations such as finding the definition files,
+#           passing definition filenames to an FA, keeping track of FAs, passing FAs strings
+#           to process
+# Outline:
+#   Build all the FAs.  Store them in a dict[filename, FA]
+#   Pass the FAs strings
+#   Ask the FAs to log themselves
+#   Print exit message
+#   Have test functionality to handle a portion of the data
 #   TODO: feed all the FA definitions into fa_reader
 #   TODO: feed input text to each FA
 class FA_Master:
-    file_prefix = 'm'                               # prefix of FA definition files
+    file_prefix = 'PJ01_runfiles/m'                 # prefix of FA definition files
     file_suffix = '.fa'                             # suffix of FA definition files
-    file_dir    = 'PJ01_runfiles/'                  # subdirectory of FA definition files
 
 
 
@@ -33,4 +40,11 @@ class FA_Master:
 
 
 
-    
+
+
+
+
+    # def build_fas(self)
+    # Purpose:
+    #
+    def build_fas(self):

@@ -1,6 +1,3 @@
-
-
-
 # class FA_Logger:
 # Purpose:  meet the logging requirements in defined in the project spec for
 #           "Log file - basename.log"
@@ -25,5 +22,16 @@ class FA_Logger:
         basename = FA.from_file.replace(".fa",'')
         f = open( basename + '.log', 'w')
         f.write('Valid: ' + FA.classification+'\n')
+
+
+
+
+
+
+    # def remove_previous_log(self)
+    # Purpose: If there is an existing logfile, delete it
+    def remove_previous_log(self):
+
+    # end def remove_previous_log(self)
 
 # end  class FA_Logger:
