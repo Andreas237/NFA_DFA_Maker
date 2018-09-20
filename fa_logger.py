@@ -17,4 +17,13 @@ class FA_Logger:
     def __init__(self):
         print("logging...")
 
+    # def log_FA
+    # Purpose: takes an FA and creates a file with the specified format
+    def log_FA(self,FA):
+        #TODO: stop doing this.  DRAW IT OUT!
+        #NOTE: {}accept states accepts empty string
+        basename = FA.from_file.replace(".fa",'')
+        f = open( basename + '.log', 'w')
+        f.write('Valid: ' + FA.classification+'\n')
+
 # end  class FA_Logger:
