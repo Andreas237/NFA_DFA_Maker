@@ -452,6 +452,7 @@ class FA:
     # \fn def print_self
     # Prints variables stored in the class
     def print_self(self):
+        print("Current state:\t\t%(cs)s" %{'cs':self.current_state})
         print("From file:\t\t%(from_file)s" % {'from_file':self.from_file})
         print("Accept states:\t\t%(accept_states)s" % {'accept_states':self.accept_states})
         print("(%(count)d)Transitions:\t\t%(trans)s" % { 'count':len(self.transition_table)  ,'trans':self.transition_table})
@@ -475,8 +476,8 @@ class FA:
         self.build_fa_from_file()   # Open a file and take a definition
         self.fa_type()              # What is the FA type?
         self.set_alphabet()         # What symbols are in the alphabet
-        self.print_self()
         self.current_state = '0'      # after processing reset the current state
+        # self.print_self()
     # end def process_def(self,filename)
 
 
@@ -489,25 +490,35 @@ class FA:
 
     # \fn def process_string(self,filename)
     # \purpose when given a string take the following actions
-    #   TODO: know when the string is finished processing and
-    #       TODO: Save the alphabet if success
-    #       TODO: Add to count of processed alphabets
+    # \param in_string string to be tested against FA definition
     def process_string(self,in_string):
+
+
         self.strings_processed = self.strings_processed + 1 # update number of strings processed
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
+
+
         # If in_string is empty string and accept states are null
         if( len(in_string) == 0  & len(self.accept_states)):
             print("ACCEPTED STRING: (" + in_string + ")")
             self.accepted_strings.append(in_string)
-        # if the final symbol doesn't lead to an accept state stop processing
+
+
+        # if the final symbol doesn't lead to an accept state stop processing, go to trap
         elif( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
-            print("Need to process failure of the string. Final symbol doesn't lead to accept")
+            print("Final symbol doesn't lead to accept - trap")
+            self.current_state = '255'
             return None
-        # Stop processing the string if it has characters not in the alphabet
+
+
+        # Stop processing the string if it has characters not in the alphabet, go to trap
         elif( self.check_in_str_alphabet(in_string) != 1 ):
-            print("Need to process failure of the string. chars not in alphabet")
+            print("chars not in alphabet - trap")
+            self.current_state = '255'
             return None
+
+        # if the string doesn't immediately fail run it through the machine
         else:
             # Process the string to the final character
             while( temp ):
@@ -533,9 +544,11 @@ class FA:
 
 
 
-    # add list states to our list of transitions.  Dupes handled by set
-    def set_accept_states(self,inStates:list):
-        for state in inStates:
+    # \fn def set_accept_states(self,inStates:list)
+    # \brief add list states to our list of transitions.  Dupes handled by set
+    # @param in_states list of states
+    def set_accept_states(self,in_states:list):
+        for state in in_states:
             self.accept_states.add(state)
         # end for state in inStates
     # end def set_accept_states(self,inStates:list)
@@ -549,7 +562,7 @@ class FA:
 
 
     # \fn def set_alphabet
-    # \purpose given the transition table read all input symbols and
+    # \brief given the transition table read all input symbols and
     #       setup the alphabet for the FA
     def set_alphabet(self):
         for t in self.transition_table:
@@ -565,7 +578,8 @@ class FA:
 
 
 
-    # Set the var:states
+    # \fn def set_states(self)
+    # \brief Set the var:states
     def set_states(self):
         for t in self.transition_table:
             self.states.add(t[0])
@@ -581,7 +595,8 @@ class FA:
 
 
 
-    # add tuple t to our list of transitions.  Dupes handled by set
+    # \fn def set_transition(self,delta:tuple)
+    # \brief add tuple t to our list of transitions.  Dupes handled by set
     def set_transition(self,delta:tuple):
         self.transition_table.add(delta)
     # end def set_transition(self,delta:tuple)
@@ -617,21 +632,21 @@ class FA:
 #-----------------      TEST RUN
 ##################################################################################
 
-x = FA()
-x.process_def("PJ01_runfiles/m02.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m01.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m00.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m03.fa")
-#test_run(4)
-y = FA()
-y.process_def("PJ01_runfiles/made_up.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m02.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m01.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m00.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m03.fa")
 
-# print("Checking final symbol: " + str(y.check_final_symbol_accept('b')))
-y.process_string('1a` ')
-y.process_string('1a`34  ')
-y.process_string('1a`43 ')
-y.process_string('1a1`0 1 b a')
-y.finalize_fa()
+
+
+#y = FA()
+#y.process_def("PJ01_runfiles/made_up.fa")
+#y.process_string('1a` ')
+#y.process_string('1a`34  ')
+#y.process_string('1a`43 ')
+#y.process_string('1a1`0 1 b a')
+#y.finalize_fa()
