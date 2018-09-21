@@ -1,6 +1,9 @@
-# class FA_Logger:
-# Purpose:  meet the logging requirements in defined in the project spec for
+##################################################################################
+#-----------------      CLASS: FA_Logger
+##################################################################################
+# Purpose:  meet the requirements defined in the project spec for
 #           "Log file - basename.log"
+#           "Output file - basename.txt"
 # Logs the following:
 #   "Valid: " and the FA classification
 #   "States: " number of states in the FA, plus state 255
@@ -13,15 +16,17 @@ class FA_Logger:
 
     def __init__(self):
         print("logging...")
+        self.basename = ''
+        self.logfile = ''
+        self.txt = ''
 
     # def log_FA
     # Purpose: takes an FA and creates a file with the specified format
     def log_FA(self,FA):
-        #TODO: stop doing this.  DRAW IT OUT!
-        #NOTE: {}accept states accepts empty string
-        basename = FA.from_file.replace(".fa",'')
-        f = open( basename + '.log', 'w')
-        f.write('Valid: ' + FA.classification+'\n')
+        self.set_filenames(FA.from_file)
+        print("FA NAME: " = self.basename)
+        print("")
+
 
 
 
@@ -30,8 +35,27 @@ class FA_Logger:
 
     # def remove_previous_log(self)
     # Purpose: If there is an existing logfile, delete it
-    def remove_previous_log(self):
-
+    def remove_previous_files(self):
+        # Remove last txt and log file
+        try:
+            os.remove(self.basename+'.txt')
+            os.remove(self.basename+'.log')
+        except Exception FileNotFoundError:
+            print("didn't find %(log)s or %(txt)s." % {} )
     # end def remove_previous_log(self)
+
+
+
+
+
+
+
+    # def set_filenames(self,filename)
+    # set the names of the files we will use
+    def set_filenames(self,filename):
+        self.basename = filename.replace('.fa')
+        self.logfile = self.basename + '.log'
+        self.txt = self.basename + '.txt'
+    # end # def set_filenames(self,filename)
 
 # end  class FA_Logger:

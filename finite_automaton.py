@@ -24,6 +24,7 @@ import re                       # regex first line for validation
 
 ##################################################################################
 #-----------------      CLASS: DELTA
+##################################################################################
 # class delta
 # Represents a transition function in the transition table
 # Description:
@@ -67,6 +68,7 @@ class delta:
 
 ##################################################################################
 #-----------------      CLASS: FA
+##################################################################################
 # class FA:
 # Description:
 #   Takes a file and sets the: accept state(s), transition table, alphabet
@@ -92,6 +94,7 @@ class FA:
         self.current_state       = '0'         # state the FA is currently in.  Default start 0
         self.from_file           = ''        # which .fa file defined this FA
         self.states              = set()     # set of states, derived from transition_table
+        self.strings_processed   = 0
         self.transition_table    = set()     # transition function tuples from FA file
     # def __init__(self)
 
@@ -293,7 +296,10 @@ class FA:
     #        0 if ANY character isn't in the alphabet
     def check_in_str_alphabet(self,in_str):
         for c in in_str:
-            if c not in self.alphabet:
+            # epsilon isn't in the alphabet!
+            if( c == '`'):
+                a = 1
+            elif c not in self.alphabet:
                 #print('WARNING: ' + c + ' NOT in alphabet')
                 return 0
         return 1
@@ -421,28 +427,39 @@ class FA:
 
     # def process_string(self,filename)
     # Purpose: when given a string take the following actions
-    #   TODO: move through transition table char-by-char
     #   TODO: know when the string is finished processing and
     #       TODO: Save the alphabet if success
     #       TODO: Add to count of processed alphabets
     def process_string(self,in_string):
-        self.current_state = '0'      # Be sure to start from the start state
-        if( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
+        self.strings_processed = self.strings_processed + 1 # update number of strings processed
+        temp = in_string                # save a copy of the string for manip
+        self.current_state = '0'        # Be sure to start from the start state
+        # If in_string is empty string and accept states are null
+        if( len(in_string) == 0  & len(self.accept_states)):
+            print("ACCEPTED STRING: (" + in_string + ")")
+            self.accepted_strings.append(in_string)
+        # if the final symbol doesn't lead to an accept state stop processing
+        elif( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
             print("Need to process failure of the string. Final symbol doesn't lead to accept")
             return None
         # Stop processing the string if it has characters not in the alphabet
-        if( self.check_in_str_alphabet(in_string) != 1 ):
+        elif( self.check_in_str_alphabet(in_string) != 1 ):
             print("Need to process failure of the string. chars not in alphabet")
             return None
+        else:
+            # Process the string to the final character
+            while( temp ):
+                self.next_state(temp[0])
+                temp = temp[1:]
 
-        # Process the string to the final character
-        while( in_string ):
-            self.next_state(in_string[0])
-            in_string = in_string[1:]
-
-        # if the current_state is in the accept states then string_accepted
-        # else string_rejected
-        print('TODO: process_string')
+            # if the current_state is in the accept states then string_accepted
+            if( self.current_state in self.accept_states):
+                print("ACCEPTED STRING: (" + in_string + ")")
+                self.accepted_strings.append(in_string)
+            else:
+                print("REJECTED STRING")
+            # else string_rejected
+        print('Process %(in)d strings so far.  Accepted %(ac)d\n' % {'ac':len(self.accepted_strings), 'in':self.strings_processed })
     # end def process_string
 
 
@@ -474,7 +491,8 @@ class FA:
     #       setup the alphabet for the FA
     def set_alphabet(self):
         for t in self.transition_table:
-            self.alphabet.add(t[1])
+            if(t[1] != '`'):
+                self.alphabet.add(t[1])
     # end def set_alphabet
 
 
@@ -510,6 +528,16 @@ class FA:
 
 
 
+
+
+
+    # def string_accept(self,in_string)
+    # This string has been accepted!  Add it to the accepted strings list
+
+
+
+
+
 #end class FA
 
 
@@ -525,32 +553,6 @@ class FA:
 
 ##################################################################################
 #-----------------      TEST RUN
-
-file_prefix = 'm'                               # prefix of FA definition files
-file_suffix = '.fa'                             # suffix of FA definition files
-file_dir    = 'PJ01_runfiles/'                  # subdirectory of FA definition files
-
-def test_run(count:int):
-    x = FA()
-    files = []
-    if( count <= 1):
-        x.process_def_test("PJ01_runfiles/m09.fa")
-    else:
-
-        for i in range(count):
-            #build the filename, then run it
-            filename = file_dir + file_prefix
-            if( i < 10):
-                filename = filename + str(0) + str(i)
-            else:
-                filename = filename + str(i)
-            filename = filename + file_suffix
-            x.process_def_test(filename)
-            files.append(filename)
-
-    print("CREATED %(n)d FAs\n" % { 'n':len(files) })
-    print("FROM FILES %(fs)s\n" % { 'fs':files })
-
 ##################################################################################
 
 x = FA()
@@ -567,3 +569,6 @@ y.process_def("PJ01_runfiles/made_up.fa")
 
 # print("Checking final symbol: " + str(y.check_final_symbol_accept('b')))
 y.process_string('1a` ')
+y.process_string('1a`34 ')
+y.process_string('1a`43 ')
+y.process_string('1a1`0 ')
