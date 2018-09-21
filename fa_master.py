@@ -6,11 +6,10 @@ from finite_automaton import FA
 
 
 # class FA_Master
-# Purpose:  fa_master handles directory operations such as finding the definition files,
+# \purpose  fa_master handles directory operations such as finding the definition files,
 #           passing definition filenames to an FA, keeping track of FAs, passing FAs strings
 #           to process
-# Outline:
-#   Build all the FAs.  Store them in a dict[filename, FA]
+# \description Build all the FAs
 #   Pass the FAs strings
 #   Ask the FAs to log themselves
 #   Print exit message
@@ -25,8 +24,8 @@ class FA_Master:
 
 
 
-    # def __init__(self)
-    # Purpose: no need to set init behavior...
+    # \fn def __init__(self)
+    # \purpose no need to set init behavior...
     def __init__(self):
         self.test_file               = ['made_up.fa']        # test FA definition files
         self.files                   = []                    # Files read into FAs
@@ -44,7 +43,10 @@ class FA_Master:
 
 
 
-    # def build_fas(self)
-    # Purpose:
+    # \fn def build_fas(self)
+    # \purpose
     #
     def build_fas(self):
+        print("TODO: build all the FAs in the directory")
+        #TODO: get list of definition files
+    # end def build_fas(self)
