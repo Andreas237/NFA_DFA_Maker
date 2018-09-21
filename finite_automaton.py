@@ -9,6 +9,7 @@
 #-----------------      IMPORT FILES
 import os                       # Open files in a directory
 import re                       # regex first line for validation
+from fa_logger import FA_Logger   # logger for FA
 
 
 
@@ -89,8 +90,8 @@ class FA:
         self.accept_states       = set()     # accept_states read from .fa file
         self.accepted_strings    = []        # Strings that reached an "accept" state
         self.alphabet            = set()     # alphabet of the input language
-        self.classification      = ''        # classification of the FA (NFA, DFA, INVALID)
-        self.class_reason        = ''        # why this classification?
+        self.valid      = ''        # classification of the FA (NFA, DFA, INVALID)
+        self.valid_reason        = ''        # why this classification?
         self.current_state       = '0'         # state the FA is currently in.  Default start 0
         self.from_file           = ''        # which .fa file defined this FA
         self.states              = set()     # set of states, derived from transition_table
@@ -116,7 +117,7 @@ class FA:
                 # If the first line is invalid cease processing
                 if self.check_accept_states(line) == 1:
                     self.set_classification = 'INVALID'
-                    self.class_reason = 'Bad accept states in file'
+                    self.valid_reason = 'Bad accept states in file'
                     return None
                 self.set_accept_states((line).replace('{','').replace('\n','').replace('}','').split(','))
 
@@ -338,28 +339,88 @@ class FA:
     #   - (INVALID) accept states contain values not in [0,255)
     def fa_type(self):
         # FA may have been classified while reading in
-        if (self.classification != ''):
+        if (self.valid != ''):
             return None
         if( self.check_dupe_tranisitons() ):
-            self.classification = 'NFA'
-            self.class_reason = 'Duplicate transition rules with the same (current_state,symbol)'
+            self.valid = 'NFA'
+            self.valid_reason = 'Duplicate transition rules with the same (current_state,symbol)'
             return None
         if( self.check_epsilon_transitions() ):
-            self.classification = 'NFA'
-            self.class_reason = "has '`' transition"
+            self.valid = 'NFA'
+            self.valid_reason = "has '`' transition"
             return None
         if( self.check_transition_state_range() ):
-            self.classification = 'INVALID'
-            self.class_reason = "Transition states not in [0,255]"
+            self.valid = 'INVALID'
+            self.valid_reason = "Transition states not in [0,255]"
             return None
         if( self.check_accept_state_range() ):
-            self.classification = 'INVALID'
-            self.class_reason = "Accept states not in [0,254]"
+            self.valid = 'INVALID'
+            self.valid_reason = "Accept states not in [0,254]"
             return None
 
-        self.classification = 'DFA'
-        self.class_reason = 'All checks for NFA/Invalid failed'
+        self.valid = 'DFA'
+        self.valid_reason = 'All checks for NFA/Invalid failed'
     # end def fa_type(self)
+
+
+
+
+
+
+    # def finalize_fa(self)
+    def finalize_fa(self):
+        me = FA_Logger()
+        me.log_FA(self)
+    # end def finalize_fa(self)
+
+
+
+
+
+    # def get_accepted_strings(self)
+    def get_accepted_strings(self):
+        return self.accepted_strings
+    # end def get_accepted_strings(self)
+
+
+
+
+
+
+    # def get_alphabet(self)
+    def get_alphabet(self):
+        return self.alphabet
+    # end def get_alphabet(self)
+
+
+
+
+
+
+    # def get_states(self)
+    def get_states(self):
+        return self.states
+    # end def get_states(self)
+
+
+
+
+
+
+    # def get_strings_processed(self)
+    def get_strings_processed(self):
+        return self.strings_processed
+    # end def get_strings_processed(self)
+
+
+
+
+
+
+    # def get_classification(self)
+    def get_valid(self):
+        return self.valid
+    # end def get_classification(self)
 
 
 
@@ -372,6 +433,7 @@ class FA:
     #   the current state
     def next_state(self,in_char):
         # for each transition in the table, if the t[0] == current state
+        # TODO: if transition isn't included send to trap state
         for transition in self.transition_table:
             if self.current_state == transition[0]:
                 if transition[1] == in_char :
@@ -394,8 +456,8 @@ class FA:
         print("Accept states:\t\t%(accept_states)s" % {'accept_states':self.accept_states})
         print("(%(count)d)Transitions:\t\t%(trans)s" % { 'count':len(self.transition_table)  ,'trans':self.transition_table})
         print("Alphabet:\t\t%(alphabet)s" % {'alphabet':self.alphabet})
-        print("FA classification:\t\t%(classification)s" %{'classification':self.classification})
-        print("FA classification reason:\t\t%(class_reason)s" %{'class_reason':self.class_reason})
+        print("FA classification:\t\t%(classification)s" %{'classification':self.valid})
+        print("FA classification reason:\t\t%(class_reason)s" %{'class_reason':self.valid_reason})
         print("\n\n\n")
     # end def print_self(self)
 
@@ -572,3 +634,4 @@ y.process_string('1a` ')
 y.process_string('1a`34 ')
 y.process_string('1a`43 ')
 y.process_string('1a1`0 ')
+y.finalize_fa()
