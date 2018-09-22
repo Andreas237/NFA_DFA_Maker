@@ -1,3 +1,16 @@
+# \author:   Andreas Slovacek
+# \description: Main function for PJ01, see PJ01.pdf for project spec.
+#               creates the FAs with self.build_fas()
+#               processes strings with
+
+
+# Lessons learned:
+# - Opening files using "with open(...)" automatically closes the file at the
+#   end of the statement
+# - list(f) on an open file returns a list with each line
+# - globs, see list_definition_files, allow you to get all the files in a dir
+#   using a regex
+
 import glob
 import os
 from finite_automaton import FA
@@ -29,13 +42,12 @@ class FA_Master:
     # \fn def __init__(self)
     # \purpose no need to set init behavior...
     def __init__(self):
-        self.test_file               = ['made_up.fa']        # test FA definition files
-        self.files                   = []                    # Files read into FAs
-        self.fa_list                 = []                # {filename:FA} pairs
-        self.file_prefix = 'm'                               # prefix of FA definition files
-        self.file_suffix = '.fa'                             # suffix of FA definition files
-        self.file_dir    = 'PJ01_runfiles/'                  # subdirectory of FA definition files
-        self.fake_file   = "PJ01_runfiles/made_up.fa"        # Made up file for testing FA definition
+        self.files                  = []                # Files read into FAs
+        self.fa_list                = []                # {filename:FA} pairs
+        self.file_prefix            = 'm'               # prefix of FA definition files
+        self.file_suffix            = '.fa'             # suffix of FA definition files
+        self.file_dir               = 'PJ01_runfiles/'  # subdirectory of FA definition files
+        self.in_strings             = []                # Strings to pass to FAs
 
     #end def __init__(self)
 
@@ -51,12 +63,36 @@ class FA_Master:
         definition_files = self.list_definition_files()
 
         for file in definition_files:
-            temp_fa = FA()
-            temp_fa.process_def(file)
+            temp_fa = FA(file)
             self.fa_list.append(temp_fa)
 
         self.print_built_fas()
     # end def build_fas(self)
+
+
+
+
+
+
+
+    # \fn def get_input_strings(self,input_file)
+    # \brief gets all input file strings and stores them in self.in_strings
+    # \return 1 if file successfully read into in_strings, 0 otherwise
+    def get_input_strings(self,input_file):
+        try:
+            with open(input_file,'r') as f:
+                self.in_strings = list(f)
+
+        except PermissionError as e:
+            print("Couldn't open %(f)s" % {'f':in_file} )
+            return 0
+
+        except FileNotFoundError as e:
+            print("%(f)s doesn't exist!" % {'f':in_file} )
+            return 0
+        else:
+            return 1
+    # end def get_input_strings(self,input_file)
 
 
 
@@ -93,23 +129,8 @@ class FA_Master:
 
 
 
-    # \fn def process_input_file(self)
-    # \brief find the input file in the directory and process it with all FAs
-    def process_input_file(self, fa_in:FA, f_pointer):
-        for line in f_pointer:
-            line = f_pointer.readline()
-            fa_in.process_string( line )
-            #print("FA from %(name)s processed line %(line)s" %{'line':line, 'name':fa_in.from_file})
-    # end def process_input_file(self)
-
-
-
-
-
-
-
     # \fn def run(self):
-    # \brief builds the FAs, opens the input text, process FA, close file
+    # \brief builds the FAs, get the input strings, try all strings in all FAs
     def run(self):
 
         self.build_fas()
@@ -117,28 +138,29 @@ class FA_Master:
         successful_fas = []
         failed_fas = []
 
-
-        in_file = 'PJ01_runfiles/input.txt'
-        try:
-            f_pointer = open(in_file, 'r')
-
-        except PermissionError as e:
-            print("Couldn't open %(f)s" % {'f':in_file} )
-
-        except FileNotFoundError as e:
-            print("%(f)s doesn't exist!" % {'f':in_file} )
-        # Process FAs
+        # Get the input strings from file
+        if self.get_input_strings('PJ01_runfiles/input_test.txt') != 1:
+            print("fa_master.get_input_strings() failed")
+            return 1
         else:
-            for fa in self.fa_list:
-                # Make sure the file pointer is at the beginning
-                f_pointer.seek(0,0)
-                self.process_input_file(fa,f_pointer)
-                fa.finalize_fa()
-                if ( len(fa.accepted_strings) > 0 ):
-                    successful_fas.append(fa)
-                else:
-                    failed_fas.append(fa)
-            f_pointer.close()
+            pass
+
+
+
+        print("Testing %(ct)d FAs in fa_master.run()" % {'ct': len(self.fa_list)})
+        for fa in self.fa_list:
+            for test_string in self.in_strings:
+                fa.process_string(test_string)
+            fa.finalize_fa()
+
+
+
+        if ( len(fa.accepted_strings) > 0 ):
+            successful_fas.append(fa)
+        else:
+            failed_fas.append(fa)
+        print("This many failed: " + str(len(failed_fas)))
+        print("This many succeeded: " + str(len(successful_fas)))
 
 
     # end def run(self)
