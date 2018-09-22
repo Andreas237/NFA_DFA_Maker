@@ -72,7 +72,7 @@ class FA_Logger:
 
             # On linux systems need to mknod before writing to file
             if( sys.platform == 'linux' ):
-                os.mknod(self.logfile,mode=666)
+                os.mknod(self.txt,mode=666)
 
             f = open(self.txt, 'w')
 

@@ -29,7 +29,6 @@ class FA_Master:
     # \fn def __init__(self)
     # \purpose no need to set init behavior...
     def __init__(self):
-
         self.test_file               = ['made_up.fa']        # test FA definition files
         self.files                   = []                    # Files read into FAs
         self.fa_list                 = []                # {filename:FA} pairs
@@ -50,20 +49,13 @@ class FA_Master:
     # \purpose build the dict of FAs and their associated file
     def build_fas(self):
         definition_files = self.list_definition_files()
-        tmp = FA()
-        tmp.process_def(definition_files[0])
-        self.fa_list.append(tmp)
-        print(self.fa_list[0].from_file)
 
-        #tmp.process_string('1a1`0 1 b a')
-        #tmp.finalize_fa()
-
-        for file in definition_files[0:5]:
+        for file in definition_files[22:26]:
             temp_fa = FA()
             temp_fa.process_def(file)
             self.fa_list.append(temp_fa)
 
-        
+        self.print_built_fas()
     # end def build_fas(self)
 
 
@@ -99,20 +91,64 @@ class FA_Master:
 
 
 
+
+
+    # \fn def process_input_file(self)
+    # \brief find the input file in the directory and process it with all FAs
+    def process_input_file(self, fa_in:FA, f_pointer):
+        for line in f_pointer:
+            line = f_pointer.readline()
+            fa_in.process_string( line )
+            print("FA from %(name)s processed line %(line)s" %{'line':line, 'name':fa_in.from_file})
+    # end def process_input_file(self)
+
+
+
+
+
+
+
+    # \fn def run(self):
+    # \brief builds the FAs, opens the input text, process FA, close file
+    def run(self):
+
+        self.build_fas()
+
+
+        in_file = 'PJ01_runfiles/input.txt'
+        try:
+            f_pointer = open(in_file, 'r')
+
+        except PermissionError as e:
+            print("Couldn't open %(f)s" % {'f':in_file} )
+
+        except FileNotFoundError as e:
+            print("%(f)s doesn't exist!" % {'f':in_file} )
+        # Process FAs
+        else:
+            for fa in self.fa_list:
+                # Make sure the file pointer is at the beginning
+                print(type(f_pointer))
+                f_pointer.seek(0,0)
+                self.process_input_file(fa,f_pointer)
+                fa.finalize_fa()
+            f_pointer.close()
+    # end def run(self)
+
+
+
+
+
+
 ##################################################################################
 #-----------------      TEST RUN
 ##################################################################################
 
 
 x = FA_Master()
-y = FA()
 #y.process_def("PJ01_runfiles/made_up.fa")
 #y.process_string('1a1`0 1 b a')
 #y.finalize_fa()
 
 #x.list_definition_files()
-x.build_fas()
-
-    # def build_fas(self)
-    # Purpose:
-    #
+x.run()

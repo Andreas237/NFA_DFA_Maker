@@ -77,17 +77,6 @@ class delta:
 #       (char in string vs. alphabet), and then check whether the string ends
 #       in an accept state.
 class FA:
-<<<<<<< HEAD
-    accept_states       = set()     # accept_states read from .fa file
-    alphabet            = set()     # alphabet of the input language
-    classification      = ''        # classification of the FA (NFA, DFA, INVALID)
-    current_state       = 0         # state the FA is currently in.  Default start 0
-    from_file           = ''        # which .fa file defined this FA
-    states              = set()     # set of states, derived from transition_table
-    transition_table    = set()     # transition function tuples from FA file
-    accepted_alphabets  = []        # alphabets accepted by this FA
-=======
->>>>>>> python
 
 
 
@@ -259,7 +248,7 @@ class FA:
 
 
     # \fn def check_epsilon_transitions
-    # return 1 if there are epsilon transitions, 0 otherwise
+    # \return epsilon_trans 1 if there are epsilon transitions, 0 otherwise
     def check_epsilon_transitions(self):
         for t in self.transition_table:
             for elt in t:
@@ -274,15 +263,6 @@ class FA:
 
 
 
-<<<<<<< HEAD
-    # Set the var:states
-    def set_states(self):
-        for t in self.transition_table:
-            print(self.from_file + str(t))
-            self.states.add(t[0])
-            self.states.add(t[2])
-=======
->>>>>>> python
 
 
     # \fn def check_final_symbol_accept(self,in_char)
