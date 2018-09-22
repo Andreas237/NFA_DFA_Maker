@@ -1,8 +1,17 @@
+# \author:   Andreas Slovacek
+# \description: finite_automaton.py has all the functions to build an FA. The
+#               most important functions are:
+#               __init__() Constructor takes a definition file.
+#               process_string which tests input strings on the FA
+#               finalize_fa: which calls the FA_Logger
+#               class Delta: is an entry in the tranistion table
+
 # Lessons Learned:
 #   - setting parameter types for fns
 #   - variables set outside of __init__, e.g. below 'class NAME: var=1' are class variables
 #       and thus keep their values from one instance to the next.
 #   - __init__ vars are instance variables and change with each instantiation
+
 
 
 ##################################################################################
@@ -86,7 +95,7 @@ class FA:
 
 
     # \fn def __init__(self)
-    def __init__(self):
+    def __init__(self, def_file):
         self.accept_states       = set()     # accept_states read from .fa file
         self.accepted_strings    = []        # Strings that reached an "accept" state
         self.alphabet            = set()     # alphabet of the input language
@@ -97,6 +106,7 @@ class FA:
         self.states              = set()     # set of states, derived from transition_table
         self.strings_processed   = 0
         self.transition_table    = set()     # transition function tuples from FA file
+        self.process_def(def_file)
     # \fn def __init__(self)
 
 
@@ -202,32 +212,6 @@ class FA:
 
 
 
-    # \fn def check_final_symbol_accept(self,in_char)
-    # \purpose if the char doesn't transition to an accept state then the alphabet
-    #          isn't worth processing.
-    # Return 0 if the final symbol doesn't lead to an accept state
-    #        1 otherwise
-    def check_final_symbol_accept(self,in_char):
-        for a_state in self.accept_states:
-            # check each tuple to see if it leads to an accept state
-            for delta in self.transition_table:
-                if(a_state == delta[2]):
-                    # If the tuple leads to an accept state check that the input
-                    # character is in the "accept" tuple
-                    if( in_char == delta[1]):
-                        return 1
-        # If no accept state then return 0, failure
-        return 0
-    # end def check_final_symbol_accept(self,in_char)
-
-
-
-
-
-
-
-
-
     # \fn def check_dupe_tranisitons(self)
     # Return 1 if there is a duplicate value in the list of (current_state, symbol)
     def check_dupe_tranisitons(self):
@@ -265,19 +249,38 @@ class FA:
 
 
 
+    # \fn def check_empty_string_accept(self,in_string)
+    # \brief Check if this is machine accepts the empty string
+    # \return 1 if yes, 0 otherwise
+    def check_empty_string_accept(self,in_string):
+        if(in_string == '\n'):
+            return 1
+        else:
+            return 0
+    # end def check_empty_string_accept(self,in_string)
+
+
+
+
+
+
+
+
+
     # \fn def check_final_symbol_accept(self,in_char)
     # \purpose if the char doesn't transition to an accept state then the alphabet
     #          isn't worth processing.
     # Return 0 if the final symbol doesn't lead to an accept state
     #        1 otherwise
-    def check_final_symbol_accept(self,in_char):
+    def check_final_symbol_accept(self,in_string):
         for a_state in self.accept_states:
             # check each tuple to see if it leads to an accept state
             for delta in self.transition_table:
                 if(a_state == delta[2]):
                     # If the tuple leads to an accept state check that the input
                     # character is in the "accept" tuple
-                    if( in_char == delta[1]):
+                    # -2 because -1 is \n
+                    if( in_string[len(in_string)-2] == delta[1]):
                         return 1
         # If no accept state then return 0, failure
         return 0
@@ -295,13 +298,12 @@ class FA:
     # \purpose If any character in the string isn't in the alphabet stop processing
     # Return 1 if all characters in the alphabet
     #        0 if ANY character isn't in the alphabet
-    def check_in_str_alphabet(self,in_str):
-        for c in in_str:
-            # epsilon isn't in the alphabet!
-            if( c == '`'):
-                a = 1
-            elif c not in self.alphabet:
-                #print('WARNING: ' + c + ' NOT in alphabet')
+    def check_in_str_alphabet(self,in_string):
+        for i in range(len(in_string)-1):
+            # epsilon isn't in the alphabet, move on
+            if( in_string[i] == '`'):
+                pass
+            elif in_string[i] not in self.alphabet:
                 return 0
         return 1
     # end def check_in_str_alphabet(self,in_str)
@@ -433,15 +435,11 @@ class FA:
     #   the current state
     def next_state(self,in_char):
         # for each transition in the table, if the t[0] == current state
-        print("In next_state")
-        print("Accept states: " + str(self.accept_states) )
         for transition in self.transition_table:
             if self.current_state == transition[0]:
                 if transition[1] == in_char :
-                    print("Move from %(curr)s to %(next)s with symbol %(sy)s!" % {'curr':self.current_state,'sy':in_char, 'next':transition[2]} )
                     self.current_state = transition[2]
                     return None
-
             # if t[1] == in_char then set the current_state to t[2]
     # end def next_state(self,in_char)
 
@@ -477,6 +475,7 @@ class FA:
         self.build_fa_from_file()   # Open a file and take a definition
         self.fa_type()              # What is the FA type?
         self.set_alphabet()         # What symbols are in the alphabet
+        self.set_states()
         self.current_state = '0'      # after processing reset the current state
         # self.print_self()
     # end def process_def(self,filename)
@@ -497,23 +496,19 @@ class FA:
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
-        print("Accept states: %(as)s\t\tin_string: %(ins)s" %{'as':str(self.accept_states),'ins':in_string})
         # If in_string is empty string and accept states are null
-        if( len(in_string) == 0  & len(self.accept_states)):
-            print("zero len string ACCEPTED STRING: (" + str(len(in_string)) + ") versus states " + str(len(self.accept_states)))
+        if( self.check_empty_string_accept(in_string) ):
             self.accepted_strings.append(in_string)
 
 
         # if the final symbol doesn't lead to an accept state stop processing, go to trap
-        elif( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
-            # print("Final symbol doesn't lead to accept - trap")
+        elif( self.check_final_symbol_accept(in_string) != 1 ):
             self.current_state = '255'
             return None
 
 
         # Stop processing the string if it has characters not in the alphabet, go to trap
         elif( self.check_in_str_alphabet(in_string) != 1 ):
-            # print("chars not in alphabet - trap")
             self.current_state = '255'
             return None
 
@@ -525,13 +520,11 @@ class FA:
                 temp = temp[1:]
 
             # if the current_state is in the accept states then string_accepted
+            #print("%(name)s has states %(st)s" %{'name':self.from_file, 'st':self.states})
             if( self.current_state in self.accept_states):
-                print("ACCEPTED STRING: (" + in_string + ")")
                 self.accepted_strings.append(in_string)
-            else:
-                print("REJECTED STRING")
             # else string_rejected
-        print('Process %(in)d strings so far.  Accepted %(ac)d\n' % {'ac':len(self.accepted_strings), 'in':self.strings_processed })
+
     # end def process_string
 
 
@@ -607,44 +600,15 @@ class FA:
 
 
 
-    # \fn def string_accept(self,in_string)
-    # This string has been accepted!  Add it to the accepted strings list
+    # \fn def test_finalize(self)
+    # \brief Print to console what should be finalized
+    def test_finalize(self):
+        print("Valid: %(valid)s\nStates: %(states)d\nAlphabet: %(alp)s\nAccepted Strings: %(acc)s" %{'valid':self.valid, 'states': len(self.states), 'alp':str(self.alphabet),'acc':str(self.accepted_strings)})
+
+    # end def test_finalize(self)
 
 
 
 
 
 #end class FA
-
-
-
-
-
-
-
-
-
-
-
-
-##################################################################################
-#-----------------      TEST RUN
-##################################################################################
-
-#x = FA()
-#x.process_def("PJ01_runfiles/m02.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m01.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m00.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m03.fa")
-
-
-#y = FA()
-#y.process_def("PJ01_runfiles/made_up.fa")
-#y.process_string('1a` ')
-#y.process_string('1a`34  ')
-#y.process_string('1a`43 ')
-#y.process_string('1a1`0 1 b a')
-#y.finalize_fa()

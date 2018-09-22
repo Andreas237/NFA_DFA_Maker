@@ -100,7 +100,6 @@ class FA_Logger:
         self.remove_previous_files()
         self.create_log_file(FA)
         self.create_txt_file(FA)
-        print("Finished FA_Logger.log_FA")
     # end def log_FA(self,FA)
 
 
@@ -115,13 +114,11 @@ class FA_Logger:
         try:
             os.remove(self.basename+'.txt')
         except Exception as e:
-            print("couldn't remove " + self.basename+'.txt' + " for delete.")
-            print(e)
+            pass    # if it didn't exist no impact
         try:
             os.remove(self.basename+'.log')
         except Exception as e:
-            print("couldn't remove " + self.basename+'.log' + " for delete.")
-            print(e)
+            pass    # if it didn't exist no impact
 
     # end def remove_previous_log(self)
 
