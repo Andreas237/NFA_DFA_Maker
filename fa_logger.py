@@ -1,13 +1,13 @@
 import os
-
+import sys  # determine platform for directory operations
 #   "States: " number of states in the FA, plus state 255
 ##################################################################################
-#-----------------      CLASS: FA_Logger
+# CLASS: FA_Logger
 ##################################################################################
-# Purpose:  meet the requirements defined in the project spec for
+# \purpose Meet the requirements defined in the project spec for
 #           "Log file - basename.log"
 #           "Output file - basename.txt"
-# Logs the following:
+# \description Logs the following:
 #   "Valid: " and the FA classification
 #   "Alphabet: " and every character read in the alphabet.  REMOVE "`" from alphabet
 #   "Accepted strings: " "a / m" where a = count(accepted strings) m = count(input strings)
@@ -16,10 +16,13 @@ import os
 
 class FA_Logger:
 
+    # \fn def __init__(self)
+    # \purpose
     def __init__(self):
-        self.basename = ''
-        self.logfile = ''
-        self.txt = ''
+        self.basename = ''      # basename as given in PJ01.pdf
+        self.logfile = ''       # output filename, created using basename + .log
+        self.txt = ''           # output filename, created using basename + .txt
+    # end def __init__(self)
 
 
 
@@ -27,13 +30,13 @@ class FA_Logger:
 
 
 
-
-    # def create_log_file(self,FA)
-    # Purpose: create .log file with required fields
+    # \fn def create_log_file(self,FA)
+    # \purpose create .log file with required fields
     def create_log_file(self,FA):
         try:
-
-            os.mknod(self.logfile,mode=666)
+            # On linux systems need to mknod before writing to file
+            if( sys.platform == 'linux' ):
+                os.mknod(self.logfile,mode=666)
 
             f = open(self.logfile, 'w')
 
@@ -48,10 +51,10 @@ class FA_Logger:
 
             f.write('Accepted Strings: ' + str(len(FA.get_accepted_strings())) + '/'+ str(FA.get_strings_processed()) + '\n')
         except PermissionError:
-            print("Couldn't open %(f)s" % {'f':self.logfile} )
+            print("Couldn't open %(f)s for logging" % {'f':self.logfile} )
 
         except FileNotFoundError:
-            print("%(f)s doesn't exist!" % {'f':self.logfile} )
+            print("%(f)s doesn't exist for logging!" % {'f':self.logfile} )
         else:
             f.close()
     # end def create_log_file(self,FA)
@@ -62,21 +65,24 @@ class FA_Logger:
 
 
 
-    # def create_txt_file(self,FA):
+    # \fn def create_txt_file(self,FA):
     # print accepted strings to the text file
     def create_txt_file(self,FA):
         try:
-            os.mknod(self.txt,mode=666)
+
+            # On linux systems need to mknod before writing to file
+            if( sys.platform == 'linux' ):
+                os.mknod(self.logfile,mode=666)
 
             f = open(self.txt, 'w')
 
             for s in FA.get_accepted_strings():
                 f.write(s + '\n')
         except PermissionError:
-            print("Couldn't open %(f)s" % {'f':self.txt} )
+            print("Couldn't open %(f)s for text" % {'f':self.txt} )
 
         except FileNotFoundError:
-            print("%(f)s doesn't exist!" % {'f':self.txt} )
+            print("%(f)s doesn't exist for text!" % {'f':self.txt} )
         else:
             f.close()
     # end def create_txt_file(self,FA)
@@ -87,8 +93,8 @@ class FA_Logger:
 
 
 
-    # def log_FA(self,FA)
-    # Purpose: takes an FA and creates a file with the specified format
+    # \fn def log_FA(self,FA)
+    # \purpose takes an FA and creates a file with the specified format
     def log_FA(self,FA):
         self.set_filenames(FA.from_file)
         self.remove_previous_files()
@@ -102,19 +108,19 @@ class FA_Logger:
 
 
 
-    # def remove_previous_log(self)
-    # Purpose: If there is an existing logfile, delete it
+    # \fn def remove_previous_log(self)
+    # \purpose If there is an existing logfile, delete it
     def remove_previous_files(self):
         # Remove last txt and log file
         try:
             os.remove(self.basename+'.txt')
         except Exception as e:
-            print("couldn't remove " + self.basename+'.txt')
+            print("couldn't remove " + self.basename+'.txt' + " for delete.")
             print(e)
         try:
             os.remove(self.basename+'.log')
         except Exception as e:
-            print("couldn't remove " + self.basename+'.log')
+            print("couldn't remove " + self.basename+'.log' + " for delete.")
             print(e)
 
     # end def remove_previous_log(self)
@@ -125,7 +131,7 @@ class FA_Logger:
 
 
 
-    # def set_filenames(self,filename)
+    # \fn def set_filenames(self,filename)
     # set the names of the files we will use
     def set_filenames(self,filename):
         self.basename = filename.replace('.fa','')
@@ -133,6 +139,6 @@ class FA_Logger:
         self.basename = "Output_files/" + self.basename
         self.logfile = self.basename + '.log'
         self.txt = self.basename + '.txt'
-    # end # def set_filenames(self,filename)
+    # end # \fn def set_filenames(self,filename)
 
 # end  class FA_Logger:

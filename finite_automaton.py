@@ -7,7 +7,7 @@
 
 ##################################################################################
 #-----------------      IMPORT FILES
-import os                       # Open files in a directory
+#import os                       # Open files in a directory
 import re                       # regex first line for validation
 from fa_logger import FA_Logger   # logger for FA
 
@@ -28,7 +28,7 @@ from fa_logger import FA_Logger   # logger for FA
 ##################################################################################
 # class delta
 # Represents a transition function in the transition table
-# Description:
+# \description
 #   Plain-old-data holder for a transition given by
 #   our in file.  Only sets and gets its data
 class delta:
@@ -68,10 +68,10 @@ class delta:
 
 
 ##################################################################################
-#-----------------      CLASS: FA
+#CLASS: FA
 ##################################################################################
 # class FA:
-# Description:
+# \description
 #   Takes a file and sets the: accept state(s), transition table, alphabet
 #   Given a string check that we can process the string
 #       (char in string vs. alphabet), and then check whether the string ends
@@ -96,19 +96,19 @@ class FA:
 
 
 
-    # def __init__(self)
+    # \fn def __init__(self)
     def __init__(self):
         self.accept_states       = set()     # accept_states read from .fa file
         self.accepted_strings    = []        # Strings that reached an "accept" state
         self.alphabet            = set()     # alphabet of the input language
-        self.valid      = ''        # classification of the FA (NFA, DFA, INVALID)
+        self.valid      = ''                 # classification of the FA (NFA, DFA, INVALID)
         self.valid_reason        = ''        # why this classification?
         self.current_state       = '0'         # state the FA is currently in.  Default start 0
         self.from_file           = ''        # which .fa file defined this FA
         self.states              = set()     # set of states, derived from transition_table
         self.strings_processed   = 0
         self.transition_table    = set()     # transition function tuples from FA file
-    # def __init__(self)
+    # \fn def __init__(self)
 
 
 
@@ -118,7 +118,7 @@ class FA:
 
 
 
-    # def build_fa_from_file(self)
+    # \fn def build_fa_from_file(self)
     def build_fa_from_file(self):
         try:
             with open(self.from_file,'r') as f:
@@ -160,7 +160,7 @@ class FA:
 
 
 
-    # def check_accept_states(self,line)
+    # \fn def check_accept_states(self,line)
     # if the line doesn't match the regular expression of a line return 1
     # else return 0
     def check_accept_states(self,line):
@@ -180,8 +180,8 @@ class FA:
 
 
 
-    # def check_state_range
-    # Purpose: return 1 if there is an accept state outside of [0,254]
+    # \fn def check_state_range
+    # \purpose return 1 if there is an accept state outside of [0,254]
     def check_accept_state_range(self):
         for state in self.accept_states:
             # if it is an integer test it
@@ -203,7 +203,7 @@ class FA:
         # end for state in self.accept_states
         return 0
 
-    # end # def check_state_range
+    # end # \fn def check_state_range
 
 
 
@@ -213,8 +213,8 @@ class FA:
 
 
 
-    # def check_final_symbol_accept(self,in_char)
-    # Purpose: if the char doesn't transition to an accept state then the alphabet
+    # \fn def check_final_symbol_accept(self,in_char)
+    # \purpose if the char doesn't transition to an accept state then the alphabet
     #          isn't worth processing.
     # Return 0 if the final symbol doesn't lead to an accept state
     #        1 otherwise
@@ -239,7 +239,7 @@ class FA:
 
 
 
-    # def check_dupe_tranisitons(self)
+    # \fn def check_dupe_tranisitons(self)
     # Return 1 if there is a duplicate value in the list of (current_state, symbol)
     def check_dupe_tranisitons(self):
         temp = []
@@ -258,7 +258,7 @@ class FA:
 
 
 
-    # def check_epsilon_transitions
+    # \fn def check_epsilon_transitions
     # return 1 if there are epsilon transitions, 0 otherwise
     def check_epsilon_transitions(self):
         for t in self.transition_table:
@@ -285,8 +285,8 @@ class FA:
 >>>>>>> python
 
 
-    # def check_final_symbol_accept(self,in_char)
-    # Purpose: if the char doesn't transition to an accept state then the alphabet
+    # \fn def check_final_symbol_accept(self,in_char)
+    # \purpose if the char doesn't transition to an accept state then the alphabet
     #          isn't worth processing.
     # Return 0 if the final symbol doesn't lead to an accept state
     #        1 otherwise
@@ -311,8 +311,8 @@ class FA:
 
 
 
-    # def check_in_str_alphabet(self,in_str)
-    # Purpose: If any character in the string isn't in the alphabet stop processing
+    # \fn def check_in_str_alphabet(self,in_str)
+    # \purpose If any character in the string isn't in the alphabet stop processing
     # Return 1 if all characters in the alphabet
     #        0 if ANY character isn't in the alphabet
     def check_in_str_alphabet(self,in_str):
@@ -333,7 +333,7 @@ class FA:
 
 
 
-    # def check_transition_state_range(self)
+    # \fn def check_transition_state_range(self)
     # return 1 if a transition goes outside of [0,255]
     def check_transition_state_range(self):
         for t in self.transition_table:
@@ -349,8 +349,8 @@ class FA:
 
 
 
-    # def fa_type()
-    # Purpose: the FA has been defined based on the file. Purpose
+    # \fn def fa_type()
+    # \purpose the FA has been defined based on the file. Purpose
     #       current info to check the type
     # Cases:
     #   - (NFA) multiple transition rules with the same current_state and symbol
@@ -387,7 +387,7 @@ class FA:
 
 
 
-    # def finalize_fa(self)
+    # \fn def finalize_fa(self)
     def finalize_fa(self):
         me = FA_Logger()
         me.log_FA(self)
@@ -397,7 +397,7 @@ class FA:
 
 
 
-    # def get_accepted_strings(self)
+    # \fn def get_accepted_strings(self)
     def get_accepted_strings(self):
         return self.accepted_strings
     # end def get_accepted_strings(self)
@@ -407,7 +407,7 @@ class FA:
 
 
 
-    # def get_alphabet(self)
+    # \fn def get_alphabet(self)
     def get_alphabet(self):
         return self.alphabet
     # end def get_alphabet(self)
@@ -417,7 +417,7 @@ class FA:
 
 
 
-    # def get_states(self)
+    # \fn def get_states(self)
     def get_states(self):
         return self.states
     # end def get_states(self)
@@ -427,7 +427,7 @@ class FA:
 
 
 
-    # def get_strings_processed(self)
+    # \fn def get_strings_processed(self)
     def get_strings_processed(self):
         return self.strings_processed
     # end def get_strings_processed(self)
@@ -437,7 +437,7 @@ class FA:
 
 
 
-    # def get_classification(self)
+    # \fn def get_classification(self)
     def get_valid(self):
         return self.valid
     # end def get_classification(self)
@@ -447,8 +447,8 @@ class FA:
 
 
 
-    # def next_state(self,in_char)
-    # Purpose:
+    # \fn def next_state(self,in_char)
+    # \purpose
     #   Advance the machine's current state based on the character input and
     #   the current state
     def next_state(self,in_char):
@@ -469,9 +469,10 @@ class FA:
 
 
 
-    # def print_self
+    # \fn def print_self
     # Prints variables stored in the class
     def print_self(self):
+        print("Current state:\t\t%(cs)s" %{'cs':self.current_state})
         print("From file:\t\t%(from_file)s" % {'from_file':self.from_file})
         print("Accept states:\t\t%(accept_states)s" % {'accept_states':self.accept_states})
         print("(%(count)d)Transitions:\t\t%(trans)s" % { 'count':len(self.transition_table)  ,'trans':self.transition_table})
@@ -489,14 +490,14 @@ class FA:
 
 
 
-    # def process_def(self,filename)
+    # \fn def process_def(self,filename)
     def process_def(self,from_file):
         self.from_file = from_file
         self.build_fa_from_file()   # Open a file and take a definition
         self.fa_type()              # What is the FA type?
         self.set_alphabet()         # What symbols are in the alphabet
-        self.print_self()
         self.current_state = '0'      # after processing reset the current state
+        # self.print_self()
     # end def process_def(self,filename)
 
 
@@ -507,27 +508,37 @@ class FA:
 
 
 
-    # def process_string(self,filename)
-    # Purpose: when given a string take the following actions
-    #   TODO: know when the string is finished processing and
-    #       TODO: Save the alphabet if success
-    #       TODO: Add to count of processed alphabets
+    # \fn def process_string(self,filename)
+    # \purpose when given a string take the following actions
+    # \param in_string string to be tested against FA definition
     def process_string(self,in_string):
+
+
         self.strings_processed = self.strings_processed + 1 # update number of strings processed
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
+
+
         # If in_string is empty string and accept states are null
         if( len(in_string) == 0  & len(self.accept_states)):
             print("ACCEPTED STRING: (" + in_string + ")")
             self.accepted_strings.append(in_string)
-        # if the final symbol doesn't lead to an accept state stop processing
+
+
+        # if the final symbol doesn't lead to an accept state stop processing, go to trap
         elif( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
-            print("Need to process failure of the string. Final symbol doesn't lead to accept")
+            print("Final symbol doesn't lead to accept - trap")
+            self.current_state = '255'
             return None
-        # Stop processing the string if it has characters not in the alphabet
+
+
+        # Stop processing the string if it has characters not in the alphabet, go to trap
         elif( self.check_in_str_alphabet(in_string) != 1 ):
-            print("Need to process failure of the string. chars not in alphabet")
+            print("chars not in alphabet - trap")
+            self.current_state = '255'
             return None
+
+        # if the string doesn't immediately fail run it through the machine
         else:
             # Process the string to the final character
             while( temp ):
@@ -553,9 +564,11 @@ class FA:
 
 
 
-    # add list states to our list of transitions.  Dupes handled by set
-    def set_accept_states(self,inStates:list):
-        for state in inStates:
+    # \fn def set_accept_states(self,inStates:list)
+    # \brief add list states to our list of transitions.  Dupes handled by set
+    # @param in_states list of states
+    def set_accept_states(self,in_states:list):
+        for state in in_states:
             self.accept_states.add(state)
         # end for state in inStates
     # end def set_accept_states(self,inStates:list)
@@ -568,8 +581,8 @@ class FA:
 
 
 
-    # def set_alphabet
-    # Purpose: given the transition table read all input symbols and
+    # \fn def set_alphabet
+    # \brief given the transition table read all input symbols and
     #       setup the alphabet for the FA
     def set_alphabet(self):
         for t in self.transition_table:
@@ -585,7 +598,8 @@ class FA:
 
 
 
-    # Set the var:states
+    # \fn def set_states(self)
+    # \brief Set the var:states
     def set_states(self):
         for t in self.transition_table:
             self.states.add(t[0])
@@ -601,7 +615,8 @@ class FA:
 
 
 
-    # add tuple t to our list of transitions.  Dupes handled by set
+    # \fn def set_transition(self,delta:tuple)
+    # \brief add tuple t to our list of transitions.  Dupes handled by set
     def set_transition(self,delta:tuple):
         self.transition_table.add(delta)
     # end def set_transition(self,delta:tuple)
@@ -613,7 +628,7 @@ class FA:
 
 
 
-    # def string_accept(self,in_string)
+    # \fn def string_accept(self,in_string)
     # This string has been accepted!  Add it to the accepted strings list
 
 
@@ -637,21 +652,21 @@ class FA:
 #-----------------      TEST RUN
 ##################################################################################
 
-x = FA()
-x.process_def("PJ01_runfiles/m02.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m01.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m00.fa")
-x = FA()
-x.process_def("PJ01_runfiles/m03.fa")
-#test_run(4)
-y = FA()
-y.process_def("PJ01_runfiles/made_up.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m02.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m01.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m00.fa")
+#x = FA()
+#x.process_def("PJ01_runfiles/m03.fa")
 
-# print("Checking final symbol: " + str(y.check_final_symbol_accept('b')))
-y.process_string('1a` ')
-y.process_string('1a`34 ')
-y.process_string('1a`43 ')
-y.process_string('1a1`0 ')
-y.finalize_fa()
+
+
+#y = FA()
+#y.process_def("PJ01_runfiles/made_up.fa")
+#y.process_string('1a` ')
+#y.process_string('1a`34  ')
+#y.process_string('1a`43 ')
+#y.process_string('1a1`0 1 b a')
+#y.finalize_fa()
