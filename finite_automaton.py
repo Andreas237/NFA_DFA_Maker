@@ -249,6 +249,24 @@ class FA:
 
 
 
+    # \fn def check_empty_string_accept(self,in_string)
+    # \brief Check if this is machine accepts the empty string
+    # \return 1 if yes, 0 otherwise
+    def check_empty_string_accept(self,in_string):
+        if(in_string == '\n'):
+            return 1
+        else:
+            return 0
+    # end def check_empty_string_accept(self,in_string)
+
+
+
+
+
+
+
+
+
     # \fn def check_final_symbol_accept(self,in_char)
     # \purpose if the char doesn't transition to an accept state then the alphabet
     #          isn't worth processing.
@@ -478,15 +496,13 @@ class FA:
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
-        # print("Accept states: %(as)s\t\tin_string: %(ins)s" %{'as':str(self.accept_states),'ins':in_string})
         # If in_string is empty string and accept states are null
-        #if( len(in_string) == 0  & len(self.accept_states)):
-        #    print(self.from_file + " zero len string ACCEPTED STRING: (" + in_string + ") versus states " + str(len(self.accept_states)))
-        #    self.accepted_strings.append(in_string)
+        if( self.check_empty_string_accept(in_string) ):
+            self.accepted_strings.append(in_string)
 
 
         # if the final symbol doesn't lead to an accept state stop processing, go to trap
-        if( self.check_final_symbol_accept(in_string) != 1 ):
+        elif( self.check_final_symbol_accept(in_string) != 1 ):
             self.current_state = '255'
             return None
 

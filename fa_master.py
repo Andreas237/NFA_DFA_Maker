@@ -141,10 +141,7 @@ class FA_Master:
         # Get the input strings from file
         if self.get_input_strings('PJ01_runfiles/input_test.txt') != 1:
             print("fa_master.get_input_strings() failed")
-            return 1
-        else:
-            pass
-
+            return 0
 
 
         print("Testing %(ct)d FAs in fa_master.run()" % {'ct': len(self.fa_list)})
