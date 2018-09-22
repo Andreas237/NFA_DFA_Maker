@@ -18,6 +18,7 @@ from finite_automaton import FA
 #   TODO: feed all the FA definitions into fa_reader
 #   TODO: feed input text to each FA
 class FA_Master:
+
     file_prefix = 'PJ01_runfiles/m'                 # prefix of FA definition files
     file_suffix = '.fa'                             # suffix of FA definition files
 
@@ -28,6 +29,7 @@ class FA_Master:
     # \fn def __init__(self)
     # \purpose no need to set init behavior...
     def __init__(self):
+
         self.test_file               = ['made_up.fa']        # test FA definition files
         self.files                   = []                    # Files read into FAs
         self.fa_list                 = []                # {filename:FA} pairs
@@ -110,3 +112,7 @@ y = FA()
 
 #x.list_definition_files()
 x.build_fas()
+
+    # def build_fas(self)
+    # Purpose:
+    #
