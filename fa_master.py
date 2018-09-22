@@ -32,8 +32,9 @@ from finite_automaton import FA
 #   TODO: feed input text to each FA
 class FA_Master:
 
-    file_prefix = 'PJ01_runfiles/m'                 # prefix of FA definition files
-    file_suffix = '.fa'                             # suffix of FA definition files
+    file_prefix     = 'PJ01_runfiles/m'                 # prefix of FA definition files
+    file_suffix     = '.fa'                             # suffix of FA definition files
+    test_str_file   = 'PJ01_runfiles/input.txt'         # file containing test strings
 
 
 
@@ -84,11 +85,11 @@ class FA_Master:
                 self.in_strings = list(f)
 
         except PermissionError as e:
-            print("Couldn't open %(f)s" % {'f':in_file} )
+            print("ERROR: Couldn't open %(f)s" % {'f':in_file} )
             return 0
 
         except FileNotFoundError as e:
-            print("%(f)s doesn't exist!" % {'f':in_file} )
+            print("ERROR: %(f)s doesn't exist!" % {'f':in_file} )
             return 0
         else:
             return 1
@@ -139,12 +140,10 @@ class FA_Master:
         failed_fas = []
 
         # Get the input strings from file
-        if self.get_input_strings('PJ01_runfiles/input_test.txt') != 1:
-            print("fa_master.get_input_strings() failed")
-            return 0
+        if self.get_input_strings(self.test_str_file) != 1:
+            raise NameError('ERROR:  fa_master.get_input_strings() failed to open input text')
 
 
-        print("Testing %(ct)d FAs in fa_master.run()" % {'ct': len(self.fa_list)})
         for fa in self.fa_list:
             for test_string in self.in_strings:
                 fa.process_string(test_string)
