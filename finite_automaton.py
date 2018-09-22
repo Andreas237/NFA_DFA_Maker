@@ -86,7 +86,7 @@ class FA:
 
 
     # \fn def __init__(self)
-    def __init__(self):
+    def __init__(self, def_file):
         self.accept_states       = set()     # accept_states read from .fa file
         self.accepted_strings    = []        # Strings that reached an "accept" state
         self.alphabet            = set()     # alphabet of the input language
@@ -97,6 +97,7 @@ class FA:
         self.states              = set()     # set of states, derived from transition_table
         self.strings_processed   = 0
         self.transition_table    = set()     # transition function tuples from FA file
+        self.process_def(def_file)
     # \fn def __init__(self)
 
 
@@ -497,7 +498,7 @@ class FA:
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
-        print("Accept states: %(as)s\t\tin_string: %(ins)s" %{'as':str(self.accept_states),'ins':in_string})
+        # print("Accept states: %(as)s\t\tin_string: %(ins)s" %{'as':str(self.accept_states),'ins':in_string})
         # If in_string is empty string and accept states are null
         if( len(in_string) == 0  & len(self.accept_states)):
             print("zero len string ACCEPTED STRING: (" + str(len(in_string)) + ") versus states " + str(len(self.accept_states)))
@@ -630,21 +631,21 @@ class FA:
 ##################################################################################
 #-----------------      TEST RUN
 ##################################################################################
+instrs = ['1a` ','1a`34  ','1a`43 ','1a1`0 1 b a','a']
 
-#x = FA()
-#x.process_def("PJ01_runfiles/m02.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m01.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m00.fa")
-#x = FA()
-#x.process_def("PJ01_runfiles/m03.fa")
+defs = ["PJ01_runfiles/m02.fa","PJ01_runfiles/m01.fa","PJ01_runfiles/m00.fa","PJ01_runfiles/made_up.fa"]
 
 
-#y = FA()
-#y.process_def("PJ01_runfiles/made_up.fa")
-#y.process_string('1a` ')
-#y.process_string('1a`34  ')
-#y.process_string('1a`43 ')
-#y.process_string('1a1`0 1 b a')
-#y.finalize_fa()
+fas = []
+
+for d in defs:
+    fas.append( FA(d) )
+    print(len(fas))
+
+#for i in range(len(fas)):
+#    fas[i].print_self()
+
+for f in fas:
+    for s in instrs:
+        f.process_string(s)
+    f.finalize_fa()
