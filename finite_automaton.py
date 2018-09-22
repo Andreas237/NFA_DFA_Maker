@@ -433,7 +433,8 @@ class FA:
     #   the current state
     def next_state(self,in_char):
         # for each transition in the table, if the t[0] == current state
-        # TODO: if transition isn't included send to trap state
+        print("In next_state")
+        print("Accept states: " + str(self.accept_states) )
         for transition in self.transition_table:
             if self.current_state == transition[0]:
                 if transition[1] == in_char :
@@ -492,29 +493,27 @@ class FA:
     # \purpose when given a string take the following actions
     # \param in_string string to be tested against FA definition
     def process_string(self,in_string):
-
-
-        self.strings_processed = self.strings_processed + 1 # update number of strings processed
+        self.strings_processed += 1 # update number of strings processed
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
-
+        print("Accept states: %(as)s\t\tin_string: %(ins)s" %{'as':str(self.accept_states),'ins':in_string})
         # If in_string is empty string and accept states are null
         if( len(in_string) == 0  & len(self.accept_states)):
-            print("ACCEPTED STRING: (" + in_string + ")")
+            print("zero len string ACCEPTED STRING: (" + str(len(in_string)) + ") versus states " + str(len(self.accept_states)))
             self.accepted_strings.append(in_string)
 
 
         # if the final symbol doesn't lead to an accept state stop processing, go to trap
         elif( self.check_final_symbol_accept(in_string[len(in_string)-1]) != 1 ):
-            print("Final symbol doesn't lead to accept - trap")
+            # print("Final symbol doesn't lead to accept - trap")
             self.current_state = '255'
             return None
 
 
         # Stop processing the string if it has characters not in the alphabet, go to trap
         elif( self.check_in_str_alphabet(in_string) != 1 ):
-            print("chars not in alphabet - trap")
+            # print("chars not in alphabet - trap")
             self.current_state = '255'
             return None
 
@@ -640,7 +639,6 @@ class FA:
 #x.process_def("PJ01_runfiles/m00.fa")
 #x = FA()
 #x.process_def("PJ01_runfiles/m03.fa")
-
 
 
 #y = FA()

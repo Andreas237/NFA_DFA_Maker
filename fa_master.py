@@ -50,7 +50,7 @@ class FA_Master:
     def build_fas(self):
         definition_files = self.list_definition_files()
 
-        for file in definition_files[22:26]:
+        for file in definition_files:
             temp_fa = FA()
             temp_fa.process_def(file)
             self.fa_list.append(temp_fa)
@@ -99,7 +99,7 @@ class FA_Master:
         for line in f_pointer:
             line = f_pointer.readline()
             fa_in.process_string( line )
-            print("FA from %(name)s processed line %(line)s" %{'line':line, 'name':fa_in.from_file})
+            #print("FA from %(name)s processed line %(line)s" %{'line':line, 'name':fa_in.from_file})
     # end def process_input_file(self)
 
 
@@ -113,6 +113,9 @@ class FA_Master:
     def run(self):
 
         self.build_fas()
+
+        successful_fas = []
+        failed_fas = []
 
 
         in_file = 'PJ01_runfiles/input.txt'
@@ -128,11 +131,16 @@ class FA_Master:
         else:
             for fa in self.fa_list:
                 # Make sure the file pointer is at the beginning
-                print(type(f_pointer))
                 f_pointer.seek(0,0)
                 self.process_input_file(fa,f_pointer)
                 fa.finalize_fa()
+                if ( len(fa.accepted_strings) > 0 ):
+                    successful_fas.append(fa)
+                else:
+                    failed_fas.append(fa)
             f_pointer.close()
+
+
     # end def run(self)
 
 
