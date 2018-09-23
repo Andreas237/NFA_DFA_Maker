@@ -69,7 +69,7 @@ Cleans residual *.log* and *.txt* files in PJ01/results
 Contains the Python files
 
 ### results/
-Contains the output .log and .txt files generated in fa_logger.py
+Contains the output *.log* and *.txt* files generated in fa_logger.py
 
 
 
