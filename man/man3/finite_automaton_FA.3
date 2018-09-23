@@ -1,0 +1,566 @@
+.TH "FA" 3 "Sun Sep 23 2018" "PJ01" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FA
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP (self, def_file)"
+.br
+.RI "Initializes a finite automaton from a definition file\&. "
+.ti -1c
+.RI "def \fBbuild_fa_from_file\fP (self)"
+.br
+.RI "Using member variables create a finite automaton\&. "
+.ti -1c
+.RI "def \fBcheck_accept_states\fP (self, line)"
+.br
+.RI "If the line doesn't match the regular expression of a line return 1 else return 0\&. "
+.ti -1c
+.RI "def \fBcheck_accept_state_range\fP (self)"
+.br
+.RI "Check if there is an accept state outside of [0,254] given in the definition file\&. "
+.ti -1c
+.RI "def \fBcheck_dupe_tranisitons\fP (self)"
+.br
+.RI "Return 1 if there is a duplicate value in the list of (current_state, symbol) "
+.ti -1c
+.RI "def \fBcheck_epsilon_transitions\fP (self)"
+.br
+.RI "Check if the transition table contains epsilon values\&. "
+.ti -1c
+.RI "def \fBcheck_empty_string_accept\fP (self, in_string)"
+.br
+.RI "Check if this is machine accepts the empty string\&. "
+.ti -1c
+.RI "def \fBcheck_final_symbol_accept\fP (self, in_string)"
+.br
+.RI "If the char doesn't transition to an accept state then the alphabet isn't worth processing\&. "
+.ti -1c
+.RI "def \fBcheck_in_str_alphabet\fP (self, in_string)"
+.br
+.RI "If any character in the string isn't in the alphabet stop processing\&. "
+.ti -1c
+.RI "def \fBcheck_transition_state_range\fP (self)"
+.br
+.RI "Check if any transition takes \fBFA\fP to a state outside valid range\&. "
+.ti -1c
+.RI "def \fBfa_type\fP (self)"
+.br
+.RI "The \fBFA\fP has been defined based on the file\&. "
+.ti -1c
+.RI "def \fBfinalize_fa\fP (self)"
+.br
+.RI "Create an FA_Logger and call it on the \fBFA\fP to log values\&. "
+.ti -1c
+.RI "def \fBget_accepted_strings\fP (self)"
+.br
+.ti -1c
+.RI "def \fBget_alphabet\fP (self)"
+.br
+.RI "Returns the alphabet\&. "
+.ti -1c
+.RI "def \fBget_dupe_set\fP (self)"
+.br
+.RI "Checks the transition table for entries that have (current state, symbol) and returns them\&. "
+.ti -1c
+.RI "def \fBget_states\fP (self)"
+.br
+.RI "Return the states in this machine\&. "
+.ti -1c
+.RI "def \fBget_strings_processed\fP (self)"
+.br
+.RI "Return the self\&.strings_processed which is a count\&. "
+.ti -1c
+.RI "def \fBget_valid\fP (self)"
+.br
+.RI "Return the value in self\&.valid\&. "
+.ti -1c
+.RI "def \fBnext_state_recurse\fP (self, in_str)"
+.br
+.RI "Find the transition with the same state and symbol, then set the current state and call again\&. "
+.ti -1c
+.RI "def \fBprint_self\fP (self)"
+.br
+.RI "Prints variables stored in the class\&. "
+.ti -1c
+.RI "def \fBprocess_def\fP (self, \fBfrom_file\fP)"
+.br
+.RI "Given a definition file read the accept states and transitions from it\&. "
+.ti -1c
+.RI "def \fBprocess_string\fP (self, in_string)"
+.br
+.RI "When given a string take the following actions: Check if processing the empty string would result in success, if yes cease processing\&. "
+.ti -1c
+.RI "def \fBset_accept_states\fP"
+.br
+.RI "Add list states to our list of transitions\&. "
+.ti -1c
+.RI "def \fBset_alphabet\fP (self)"
+.br
+.RI "Given the transition table read all input symbols and setup the alphabet for the \fBFA\fP\&. "
+.ti -1c
+.RI "def \fBset_states\fP (self)"
+.br
+.RI "Set the states of the \fBFA\fP based on tuples from \fBFA\fP definition\&. "
+.ti -1c
+.RI "def \fBset_transition\fP"
+.br
+.RI "Add tuple t to our list of transitions\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBaccept_states\fP"
+.br
+.RI "accept_states read from \&.fa file "
+.ti -1c
+.RI "\fBaccepted_strings\fP"
+.br
+.RI "Strings that reached an 'accept' state\&. "
+.ti -1c
+.RI "\fBalphabet\fP"
+.br
+.RI "alphabet of the input language "
+.ti -1c
+.RI "\fBcurrent_state\fP"
+.br
+.RI "state the \fBFA\fP is currently in\&. "
+.ti -1c
+.RI "\fBepsilon_trans\fP"
+.br
+.RI "set of transitions with multiple 'to' states "
+.ti -1c
+.RI "\fBfrom_file\fP"
+.br
+.RI "which \&.fa file defined this \fBFA\fP "
+.ti -1c
+.RI "\fBstates\fP"
+.br
+.RI "set of states, derived from transition_table "
+.ti -1c
+.RI "\fBstrings_processed\fP"
+.br
+.RI "Count of strings this \fBFA\fP has processed\&. "
+.ti -1c
+.RI "\fBtransition_table\fP"
+.br
+.RI "transition function tuples from \fBFA\fP file "
+.ti -1c
+.RI "\fBvalid\fP"
+.br
+.RI "classification of the \fBFA\fP (NFA, DFA, INVALID) "
+.ti -1c
+.RI "\fBvalid_reason\fP"
+.br
+.RI "why this classification? "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+Takes a file and sets the: accept state(s), transition table, alphabet.
+Given a string check that we can process the string.
+(char in string vs. alphabet), and then check whether the string ends in an accept state.
+
+.fi
+.PP
+ 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def __init__ ( self,  def_file)"
+
+.PP
+Initializes a finite automaton from a definition file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIdef_file\fP m*\&.fa file in PJ01_runfiles 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def build_fa_from_file ( self)"
+
+.PP
+Using member variables create a finite automaton\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self param[in] self\&.from_file Name of file where the definition is 
+.RE
+.PP
+
+.SS "def check_accept_state_range ( self)"
+
+.PP
+Check if there is an accept state outside of [0,254] given in the definition file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.accept_states\fP accept states for the \fBFA\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if accept state outside of [0,254] exists, 0 otherwise 
+.RE
+.PP
+
+.SS "def check_accept_states ( self,  line)"
+
+.PP
+If the line doesn't match the regular expression of a line return 1 else return 0\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIline\fP first line from m*\&.fa file 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if the line matches 0 otherwise 
+.RE
+.PP
+
+.SS "def check_dupe_tranisitons ( self)"
+
+.PP
+Return 1 if there is a duplicate value in the list of (current_state, symbol) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.transition_table\fP transition table for the \fBFA\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if multiple transitions with the same (current state, symbol), 0 otherwise 
+.RE
+.PP
+
+.SS "def check_empty_string_accept ( self,  in_string)"
+
+.PP
+Check if this is machine accepts the empty string\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if input string is empty, 0 otherwise 
+.RE
+.PP
+
+.SS "def check_epsilon_transitions ( self)"
+
+.PP
+Check if the transition table contains epsilon values\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.transition_table\fP transition table for the \fBFA\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if there are epsilon transitions, 0 otherwise 
+.RE
+.PP
+
+.SS "def check_final_symbol_accept ( self,  in_string)"
+
+.PP
+If the char doesn't transition to an accept state then the alphabet isn't worth processing\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIin_string\fP string to check final symbol 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 0 if the final symbol doesn't lead to an accept state 1 otherwise 
+.RE
+.PP
+
+.SS "def check_in_str_alphabet ( self,  in_string)"
+
+.PP
+If any character in the string isn't in the alphabet stop processing\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIin_string\fP string whose alphabet needs checking 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if all characters in the alphabet, 0 otherwise 
+.RE
+.PP
+
+.SS "def check_transition_state_range ( self)"
+
+.PP
+Check if any transition takes \fBFA\fP to a state outside valid range\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if a transition goes outside of [0,255], 0 otherwise 
+.RE
+.PP
+
+.SS "def fa_type ( self)"
+
+.PP
+The \fBFA\fP has been defined based on the file\&. Purpose current info to check the type (NFA) multiple transition rules with the same current_state and symbol (NFA) epsilon transition rules, where '`' used (INVALID) transitions from/to states not in [0,255] (INVALID) accept states contain values not in [0,255) 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self param[in] self\&.valid DFA/NFA/INVALID depending on logic param[in] self\&.valid_reason explanation of self\&.valid 
+.RE
+.PP
+
+.SS "def finalize_fa ( self)"
+
+.PP
+Create an FA_Logger and call it on the \fBFA\fP to log values\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def get_alphabet ( self)"
+
+.PP
+Returns the alphabet\&. Called from logger 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the \fBFA\fP alphabet 
+.RE
+.PP
+
+.SS "def get_dupe_set ( self)"
+
+.PP
+Checks the transition table for entries that have (current state, symbol) and returns them\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fI\fP 
+.RE
+.PP
+
+.SS "def get_states ( self)"
+
+.PP
+Return the states in this machine\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.states\fP set of states for this \fBFA\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the \fBFA\fP states 
+.RE
+.PP
+
+.SS "def get_strings_processed ( self)"
+
+.PP
+Return the self\&.strings_processed which is a count\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.strings_processed\fP count of strings processed by this \fBFA\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the strings processed by the \fBFA\fP 
+.RE
+.PP
+
+.SS "def get_valid ( self)"
+
+.PP
+Return the value in self\&.valid\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.valid\fP machines validity 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+the \fBFA\fP valid (DFA/NFA/INVALID) 
+.RE
+.PP
+
+.SS "def next_state_recurse ( self,  in_str)"
+
+.PP
+Find the transition with the same state and symbol, then set the current state and call again\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def print_self ( self)"
+
+.PP
+Prints variables stored in the class\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def process_def ( self,  from_file)"
+
+.PP
+Given a definition file read the accept states and transitions from it\&. Then call function on teh values read in to fill out member variables\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.from_file\fP name of the file defining this \fBFA\fP 
+.br
+\fIself\&.current_state\fP start state of the machine 
+.RE
+.PP
+
+.SS "def process_string ( self,  in_string)"
+
+.PP
+When given a string take the following actions: Check if processing the empty string would result in success, if yes cease processing\&. Check that the final symbol in the string would lead to an accept state, cease processing if not\&. Check that the input string is in the acceptable alphabet, cease processing if not\&. Else advance through the states with next_state_recurse(symbol) and check that we're at an accept state after 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIin_string\fP string to be tested against \fBFA\fP definition 
+.RE
+.PP
+
+.SS "def set_accept_states ( self,  in_states)"
+
+.PP
+Add list states to our list of transitions\&. Dupes handled by set 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIin_states\fP list of states 
+.RE
+.PP
+
+.SS "def set_alphabet ( self)"
+
+.PP
+Given the transition table read all input symbols and setup the alphabet for the \fBFA\fP\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def set_states ( self)"
+
+.PP
+Set the states of the \fBFA\fP based on tuples from \fBFA\fP definition\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.states\fP states in the \fBFA\fP 
+.RE
+.PP
+
+.SS "def set_transition ( self,  delta)"
+
+.PP
+Add tuple t to our list of transitions\&. Dupes handled by set 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIdelta:tuple\fP tuple to be added to the tranition table 
+.RE
+.PP
+
+.SH "Member Data Documentation"
+.PP 
+.SS "current_state"
+
+.PP
+state the \fBFA\fP is currently in\&. Open a file and take a definition\&.
+.PP
+Default start 0
+.PP
+What is the \fBFA\fP type? What symbols are in the alphabet Get the states After processing definition set the current state 
+.SS "from_file"
+
+.PP
+which \&.fa file defined this \fBFA\fP Record which file defined this \fBFA\fP\&. 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PJ01 from the source code\&.

@@ -1,0 +1,29 @@
+\hypertarget{namespacefinite__automaton}{}\section{finite\+\_\+automaton Namespace Reference}
+\label{namespacefinite__automaton}\index{finite\+\_\+automaton@{finite\+\_\+automaton}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfinite__automaton_1_1delta}{delta}}
+\item 
+class \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@package finite_automaton
+
+Author: Andreas Slovacek
+
+finite_automaton.py has all the functions to build an FA. The most important functions are:
+   __init__() Constructor takes a definition file.
+  process_string() which tests input strings on the FA.
+  finalize_fa which() calls the FA_Logger
+  class Delta is an entry in the tranistion table
+
+Lessons Learned:
+   - setting parameter types for fns
+   - variables set outside of __init__, e.g. below 'class NAME: var=1' are class variables
+ and thus keep their values from one instance to the next.
+   - __init__ vars are instance variables and change with each instantiation
+\end{DoxyVerb}
+ 

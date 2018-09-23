@@ -1,0 +1,48 @@
+.TH "fa_master" 3 "Sun Sep 23 2018" "PJ01" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+fa_master
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBFA_Master\fP"
+.br
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "\fBx\fP = \fBFA_Master\fP()"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+@package fa_master
+
+Author: Andreas Slovacek
+
+Main function for PJ01, see PJ01.pdf for project spec. Order of operations:
+Creates the FAs with self.build_fas()
+Processes strings with
+
+Lessons learned:
+- Opening files using "with open(...)" automatically closes the file at the
+    end of the statement
+- list(f) on an open file returns a list with each line
+- globs, see list_definition_files, allow you to get all the files in a dir
+using a regex
+
+.fi
+.PP
+ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PJ01 from the source code\&.

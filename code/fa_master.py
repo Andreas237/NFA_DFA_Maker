@@ -1,15 +1,21 @@
-# \author:   Andreas Slovacek
-# \description: Main function for PJ01, see PJ01.pdf for project spec.
-#               creates the FAs with self.build_fas()
-#               processes strings with
+"""
+@package fa_master
+
+Author: Andreas Slovacek
+
+Main function for PJ01, see PJ01.pdf for project spec. Order of operations:
+    Creates the FAs with self.build_fas()
+    Processes strings with
+
+Lessons learned:
+    - Opening files using "with open(...)" automatically closes the file at the
+        end of the statement
+    - list(f) on an open file returns a list with each line
+    - globs, see list_definition_files, allow you to get all the files in a dir
+using a regex
+"""
 
 
-# Lessons learned:
-# - Opening files using "with open(...)" automatically closes the file at the
-#   end of the statement
-# - list(f) on an open file returns a list with each line
-# - globs, see list_definition_files, allow you to get all the files in a dir
-#   using a regex
 
 import glob
 import os
@@ -21,37 +27,45 @@ from progress_bar import loadingBar
 
 
 
-# class FA_Master
-# \purpose  fa_master handles directory operations such as finding the definition files,
-#           passing definition filenames to an FA, keeping track of FAs, passing FAs strings
-#           to process
-# \description Build all the FAs
-#   Pass the FAs strings
-#   Ask the FAs to log themselves
-#   Print exit message
-#   Have test functionality to handle a portion of the data
-#   TODO: feed all the FA definitions into fa_reader
-#   TODO: feed input text to each FA
 class FA_Master:
+    """
+    fa_master handles directory operations such as finding the definition files,
+    passing definition filenames to an FA, keeping track of FAs, passing FAs strings
+    to process.  Order of operations:
+    Build all the FAs
+    Pass the FAs strings
+    Ask the FAs to log themselves
+    Print exit message
+    Have test functionality to handle a portion of the data
 
-    file_prefix     = '../PJ01_runfiles/m'                 # prefix of FA definition files
-    file_suffix     = '.fa'                             # suffix of FA definition files
-    test_str_file   = '../PJ01_runfiles/input.txt'         # file containing test strings
+    Running this file with >>python3 fa_master.py will execute the script at the bottom of the file.
+    """
+    ## prefix of FA definition files
+    file_prefix     = '../PJ01_runfiles/m'
+    ## suffix of FA definition files
+    file_suffix     = '.fa'
+    ## file containing test strings
+    test_str_file   = '../PJ01_runfiles/input.txt'
 
 
 
 
 
-    # \fn def __init__(self)
-    # \purpose no need to set init behavior...
+    ##  Set instance vars
+    # @param self pointer to self
     def __init__(self):
-        self.files          = []                # Files read into FAs
-        self.fa_list        = []                # {filename:FA} pairs
-        self.file_prefix    = 'm'               # prefix of FA definition files
-        self.file_suffix    = '.fa'             # suffix of FA definition files
-        self.file_dir       = '../PJ01_runfiles/'  # subdirectory of FA definition files
-        self.in_strings     = []                # Strings to pass to FAs
-
+        ## Files read into FAs
+        self.files          = []
+        ## List of FAs from .fa file
+        self.fa_list        = []
+        ## prefix of FA definition files
+        self.file_prefix    = 'm'
+        ## suffix of FA definition files
+        self.file_suffix    = '.fa'
+        ## subdirectory of FA definition files
+        self.file_dir       = '../PJ01_runfiles/'
+        ## Strings to pass to FAs
+        self.in_strings     = []
     #end def __init__(self)
 
 
@@ -60,8 +74,8 @@ class FA_Master:
 
 
 
-    # \fn def build_fas(self)
-    # \purpose build the dict of FAs and their associated file
+    ## Build the list of FAs and their associated file
+    # @param self pointer to self
     def build_fas(self):
         definition_files = self.list_definition_files()
         print("Building FAs")
@@ -78,9 +92,10 @@ class FA_Master:
 
 
 
-    # \fn def get_input_strings(self,input_file)
-    # \brief gets all input file strings and stores them in self.in_strings
-    # \return 1 if file successfully read into in_strings, 0 otherwise
+    ## Gets all input file strings and stores them in self.in_strings
+    # @param self pointer to self
+    # @param[in] self.in_strings list[] of strings from input.txt
+    # @return boolean 1 if file successfully read into self.in_strings, 0 otherwise
     def get_input_strings(self,input_file):
         try:
             with open(input_file,'r') as f:
@@ -103,8 +118,9 @@ class FA_Master:
 
 
 
-    # \fn def list_definition_files(self)
-    # \purpose return a list of all FA definition files in PJ01_runfiles/
+    ##  return a list of all FA definition files in PJ01_runfiles/
+    # @param self pointer to self
+    # @param[in] self.file_dir directory where the definition files are stored
     def list_definition_files(self):
         files = []
         # mathch .fa files in PJ01_runfiles/
@@ -119,8 +135,9 @@ class FA_Master:
 
 
 
-    # \fn def print_built_fas(self)
-    # \brief list definition file for each FA, print_self function
+    ## List definition file for each FA, print_self function
+    # @param self pointer to self
+    # @param[in] self.fa_list list of the FAs built from definition files.
     def print_built_fas(self):
         for fa in self.fa_list:
             fa.print_self()
@@ -132,8 +149,9 @@ class FA_Master:
 
 
 
-    # \fn def run(self):
-    # \brief builds the FAs, get the input strings, try all strings in all FAs
+    ##  Builds the FAs, get the input strings, try all strings in all FAs.
+    # Show updates in the CLI to confirm it hasn't crashed.
+    # @param self pointer to self
     def run(self):
         # START tracks the beginning of the process
         start = time.time()
@@ -174,10 +192,7 @@ class FA_Master:
 
 
 
-##################################################################################
-#-----------------      TEST RUN
-##################################################################################
 
-
+# TEST RUN
 x = FA_Master()
 x.run()

@@ -1,0 +1,145 @@
+\hypertarget{classfa__logger_1_1_f_a___logger}{}\section{F\+A\+\_\+\+Logger Class Reference}
+\label{classfa__logger_1_1_f_a___logger}\index{F\+A\+\_\+\+Logger@{F\+A\+\_\+\+Logger}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_ae64f0875afe3067b97ba370b354b9213}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self)
+\begin{DoxyCompactList}\small\item\em Initialize the logger fields. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_ab65d7bfdf1064996848a8f66cc51a8bc}{create\+\_\+log\+\_\+file}} (self, FA)
+\begin{DoxyCompactList}\small\item\em Create .log file with required fields. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_a2b8f832136f088b2c9cbb581e269736d}{create\+\_\+txt\+\_\+file}} (self, FA)
+\begin{DoxyCompactList}\small\item\em Print accepted strings to a text file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_a1a28f2676eeb8c10690675c7595c4841}{log\+\_\+\+FA}} (self, FA)
+\begin{DoxyCompactList}\small\item\em Takes an FA and creates a file with the specified format. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_a1946635ab60794dcc17d9f394f043b9b}{remove\+\_\+previous\+\_\+files}} (self)
+\begin{DoxyCompactList}\small\item\em If there is an existing log file or text file, delete it. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfa__logger_1_1_f_a___logger_a0d497d461f3694c2cb33d896dc333192}{set\+\_\+filenames}} (self, filename)
+\begin{DoxyCompactList}\small\item\em Set the name of the file to be created, make sure the results/ exists, set the names of the .log and .txt files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_a69209e30b1130bed6d89e9718b948cef}\label{classfa__logger_1_1_f_a___logger_a69209e30b1130bed6d89e9718b948cef}} 
+\mbox{\hyperlink{classfa__logger_1_1_f_a___logger_a69209e30b1130bed6d89e9718b948cef}{basename}}
+\begin{DoxyCompactList}\small\item\em basename as given in P\+J01.\+pdf \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_ad5dc54ad31adc60ebf4dd2ba4348a8a2}\label{classfa__logger_1_1_f_a___logger_ad5dc54ad31adc60ebf4dd2ba4348a8a2}} 
+\mbox{\hyperlink{classfa__logger_1_1_f_a___logger_ad5dc54ad31adc60ebf4dd2ba4348a8a2}{logfile}}
+\begin{DoxyCompactList}\small\item\em output filename, created using basename + .log \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_ad53b06d328772d47b6669970488232c1}\label{classfa__logger_1_1_f_a___logger_ad53b06d328772d47b6669970488232c1}} 
+\mbox{\hyperlink{classfa__logger_1_1_f_a___logger_ad53b06d328772d47b6669970488232c1}{txt}}
+\begin{DoxyCompactList}\small\item\em output filename, created using basename + .txt \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}FA_Logger
+    Meet the requirements defined in the project spec for "Log file - basename.log" and "Output file - basename.txt"
+    Logs the following:
+        * "Valid: " and the FA classification
+        * "Alphabet: " and every character read in the alphabet.  REMOVE "`" from alphabet
+        * "Accepted strings: " "a / m" where a = count(accepted strings) m = count(input strings)
+        * 0/0 for INVALID FAs
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_ae64f0875afe3067b97ba370b354b9213}\label{classfa__logger_1_1_f_a___logger_ae64f0875afe3067b97ba370b354b9213}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Initialize the logger fields. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_ab65d7bfdf1064996848a8f66cc51a8bc}\label{classfa__logger_1_1_f_a___logger_ab65d7bfdf1064996848a8f66cc51a8bc}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!create\+\_\+log\+\_\+file@{create\+\_\+log\+\_\+file}}
+\index{create\+\_\+log\+\_\+file@{create\+\_\+log\+\_\+file}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{create\+\_\+log\+\_\+file()}{create\_log\_file()}}
+{\footnotesize\ttfamily def create\+\_\+log\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{FA }\end{DoxyParamCaption})}
+
+
+
+Create .log file with required fields. 
+
+Get the values from the FA. Logic applied to V\+A\+L\+ID. 
+\begin{DoxyParams}{Parameters}
+{\em FA} & a finite automaton \\
+\hline
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_a2b8f832136f088b2c9cbb581e269736d}\label{classfa__logger_1_1_f_a___logger_a2b8f832136f088b2c9cbb581e269736d}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!create\+\_\+txt\+\_\+file@{create\+\_\+txt\+\_\+file}}
+\index{create\+\_\+txt\+\_\+file@{create\+\_\+txt\+\_\+file}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{create\+\_\+txt\+\_\+file()}{create\_txt\_file()}}
+{\footnotesize\ttfamily def create\+\_\+txt\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{FA }\end{DoxyParamCaption})}
+
+
+
+Print accepted strings to a text file. 
+
+Create the text file as needed. 
+\begin{DoxyParams}{Parameters}
+{\em FA} & a finite automaton \\
+\hline
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_a1a28f2676eeb8c10690675c7595c4841}\label{classfa__logger_1_1_f_a___logger_a1a28f2676eeb8c10690675c7595c4841}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!log\+\_\+\+FA@{log\+\_\+\+FA}}
+\index{log\+\_\+\+FA@{log\+\_\+\+FA}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{log\+\_\+\+F\+A()}{log\_FA()}}
+{\footnotesize\ttfamily def log\+\_\+\+FA (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{FA }\end{DoxyParamCaption})}
+
+
+
+Takes an FA and creates a file with the specified format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_a1946635ab60794dcc17d9f394f043b9b}\label{classfa__logger_1_1_f_a___logger_a1946635ab60794dcc17d9f394f043b9b}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!remove\+\_\+previous\+\_\+files@{remove\+\_\+previous\+\_\+files}}
+\index{remove\+\_\+previous\+\_\+files@{remove\+\_\+previous\+\_\+files}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{remove\+\_\+previous\+\_\+files()}{remove\_previous\_files()}}
+{\footnotesize\ttfamily def remove\+\_\+previous\+\_\+files (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+If there is an existing log file or text file, delete it. 
+
+Fail silently 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfa__logger_1_1_f_a___logger_a0d497d461f3694c2cb33d896dc333192}\label{classfa__logger_1_1_f_a___logger_a0d497d461f3694c2cb33d896dc333192}} 
+\index{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}!set\+\_\+filenames@{set\+\_\+filenames}}
+\index{set\+\_\+filenames@{set\+\_\+filenames}!fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger@{fa\+\_\+logger\+::\+F\+A\+\_\+\+Logger}}
+\subsubsection{\texorpdfstring{set\+\_\+filenames()}{set\_filenames()}}
+{\footnotesize\ttfamily def set\+\_\+filenames (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{filename }\end{DoxyParamCaption})}
+
+
+
+Set the name of the file to be created, make sure the results/ exists, set the names of the .log and .txt files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/fa\+\_\+logger.\+py\end{DoxyCompactItemize}

@@ -1,0 +1,45 @@
+.TH "finite_automaton" 3 "Sun Sep 23 2018" "PJ01" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+finite_automaton
+.SH SYNOPSIS
+.br
+.PP
+.SS "Classes"
+
+.in +1c
+.ti -1c
+.RI "class \fBdelta\fP"
+.br
+.ti -1c
+.RI "class \fBFA\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+@package finite_automaton
+
+Author: Andreas Slovacek
+
+finite_automaton.py has all the functions to build an FA. The most important functions are:
+   __init__() Constructor takes a definition file.
+  process_string() which tests input strings on the FA.
+  finalize_fa which() calls the FA_Logger
+  class Delta is an entry in the tranistion table
+
+Lessons Learned:
+   - setting parameter types for fns
+   - variables set outside of __init__, e.g. below 'class NAME: var=1' are class variables
+ and thus keep their values from one instance to the next.
+   - __init__ vars are instance variables and change with each instantiation
+
+.fi
+.PP
+ 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PJ01 from the source code\&.

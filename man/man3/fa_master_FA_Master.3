@@ -1,0 +1,184 @@
+.TH "FA_Master" 3 "Sun Sep 23 2018" "PJ01" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FA_Master
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP (self)"
+.br
+.RI "Set instance vars\&. "
+.ti -1c
+.RI "def \fBbuild_fas\fP (self)"
+.br
+.RI "Build the list of FAs and their associated file\&. "
+.ti -1c
+.RI "def \fBget_input_strings\fP (self, input_file)"
+.br
+.RI "Gets all input file strings and stores them in self\&.in_strings\&. "
+.ti -1c
+.RI "def \fBlist_definition_files\fP (self)"
+.br
+.RI "return a list of all FA definition files in PJ01_runfiles/ "
+.ti -1c
+.RI "def \fBprint_built_fas\fP (self)"
+.br
+.RI "List definition file for each FA, print_self function\&. "
+.ti -1c
+.RI "def \fBrun\fP (self)"
+.br
+.RI "Builds the FAs, get the input strings, try all strings in all FAs\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBfiles\fP"
+.br
+.RI "Files read into FAs\&. "
+.ti -1c
+.RI "\fBfa_list\fP"
+.br
+.RI "List of FAs from \&.fa file\&. "
+.ti -1c
+.RI "\fBfile_prefix\fP"
+.br
+.RI "prefix of FA definition files "
+.ti -1c
+.RI "\fBfile_suffix\fP"
+.br
+.RI "suffix of FA definition files "
+.ti -1c
+.RI "\fBfile_dir\fP"
+.br
+.RI "subdirectory of FA definition files "
+.ti -1c
+.RI "\fBin_strings\fP"
+.br
+.RI "Strings to pass to FAs\&. "
+.in -1c
+.SS "Static Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "string \fBfile_prefix\fP = '\&.\&./PJ01_runfiles/m'"
+.br
+.RI "prefix of FA definition files "
+.ti -1c
+.RI "string \fBfile_suffix\fP = '\&.fa'"
+.br
+.RI "suffix of FA definition files "
+.ti -1c
+.RI "string \fBtest_str_file\fP = '\&.\&./PJ01_runfiles/input\&.txt'"
+.br
+.RI "file containing test strings "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+fa_master handles directory operations such as finding the definition files,
+passing definition filenames to an FA, keeping track of FAs, passing FAs strings
+to process.  Order of operations:
+Build all the FAs
+Pass the FAs strings
+Ask the FAs to log themselves
+Print exit message
+Have test functionality to handle a portion of the data
+
+Running this file with >>python3 fa_master.py will execute the script at the bottom of the file.
+
+.fi
+.PP
+ 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def __init__ ( self)"
+
+.PP
+Set instance vars\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def build_fas ( self)"
+
+.PP
+Build the list of FAs and their associated file\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def get_input_strings ( self,  input_file)"
+
+.PP
+Gets all input file strings and stores them in self\&.in_strings\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.in_strings\fP list[] of strings from input\&.txt 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+boolean 1 if file successfully read into self\&.in_strings, 0 otherwise 
+.RE
+.PP
+
+.SS "def list_definition_files ( self)"
+
+.PP
+return a list of all FA definition files in PJ01_runfiles/ 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.file_dir\fP directory where the definition files are stored 
+.RE
+.PP
+
+.SS "def print_built_fas ( self)"
+
+.PP
+List definition file for each FA, print_self function\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.br
+\fIself\&.fa_list\fP list of the FAs built from definition files\&. 
+.RE
+.PP
+
+.SS "def run ( self)"
+
+.PP
+Builds the FAs, get the input strings, try all strings in all FAs\&. Show updates in the CLI to confirm it hasn't crashed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PJ01 from the source code\&.

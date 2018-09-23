@@ -1,0 +1,582 @@
+\hypertarget{classfinite__automaton_1_1_f_a}{}\section{FA Class Reference}
+\label{classfinite__automaton_1_1_f_a}\index{FA@{FA}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_acc13390ea8996a5b9c95efec4ab3ac8c}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, def\+\_\+file)
+\begin{DoxyCompactList}\small\item\em Initializes a finite automaton from a definition file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a99687a41970ccfd859dacdf6ab41a0f1}{build\+\_\+fa\+\_\+from\+\_\+file}} (self)
+\begin{DoxyCompactList}\small\item\em Using member variables create a finite automaton. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_afffebaa358fefaf2b7ad69787744874a}{check\+\_\+accept\+\_\+states}} (self, line)
+\begin{DoxyCompactList}\small\item\em If the line doesn\textquotesingle{}t match the regular expression of a line return 1 else return 0. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a3a87627d77810aed5976b4f053542b37}{check\+\_\+accept\+\_\+state\+\_\+range}} (self)
+\begin{DoxyCompactList}\small\item\em Check if there is an accept state outside of \mbox{[}0,254\mbox{]} given in the definition file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_ac6ce3b4cc7d71b74ce160e55062a0402}{check\+\_\+dupe\+\_\+tranisitons}} (self)
+\begin{DoxyCompactList}\small\item\em Return 1 if there is a duplicate value in the list of (current\+\_\+state, symbol) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a50aac0972f155714c805126384813d1f}{check\+\_\+epsilon\+\_\+transitions}} (self)
+\begin{DoxyCompactList}\small\item\em Check if the transition table contains epsilon values. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a87734b6c31285c080862a62f00527d97}{check\+\_\+empty\+\_\+string\+\_\+accept}} (self, in\+\_\+string)
+\begin{DoxyCompactList}\small\item\em Check if this is machine accepts the empty string. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a1a8126235389c671e1a4f23895154162}{check\+\_\+final\+\_\+symbol\+\_\+accept}} (self, in\+\_\+string)
+\begin{DoxyCompactList}\small\item\em If the char doesn\textquotesingle{}t transition to an accept state then the alphabet isn\textquotesingle{}t worth processing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_ae2909d69bb02d15bdf17c808106e35d7}{check\+\_\+in\+\_\+str\+\_\+alphabet}} (self, in\+\_\+string)
+\begin{DoxyCompactList}\small\item\em If any character in the string isn\textquotesingle{}t in the alphabet stop processing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a5807041a61c4627c67836cd425522675}{check\+\_\+transition\+\_\+state\+\_\+range}} (self)
+\begin{DoxyCompactList}\small\item\em Check if any transition takes \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} to a state outside valid range. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a279deb94ddb3198fe1cc36a981f87550}{fa\+\_\+type}} (self)
+\begin{DoxyCompactList}\small\item\em The \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} has been defined based on the file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a34e4c3a2ff6279ae393c6aa71b6a6c67}{finalize\+\_\+fa}} (self)
+\begin{DoxyCompactList}\small\item\em Create an F\+A\+\_\+\+Logger and call it on the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} to log values. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a05e615cf60b67101a63f10cca4c57000}\label{classfinite__automaton_1_1_f_a_a05e615cf60b67101a63f10cca4c57000}} 
+def {\bfseries get\+\_\+accepted\+\_\+strings} (self)
+\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a8e18faca5cb09062bcef65e75ab2ba29}{get\+\_\+alphabet}} (self)
+\begin{DoxyCompactList}\small\item\em Returns the alphabet. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a50297a5bd3019015c230357f0e48e7d8}{get\+\_\+dupe\+\_\+set}} (self)
+\begin{DoxyCompactList}\small\item\em Checks the transition table for entries that have (current state, symbol) and returns them. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_ab4dea73d1d875356d9cdde9ade8dd32e}{get\+\_\+states}} (self)
+\begin{DoxyCompactList}\small\item\em Return the states in this machine. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a7e50b6bf5e22b78a0fa7a2fdfc0a41e0}{get\+\_\+strings\+\_\+processed}} (self)
+\begin{DoxyCompactList}\small\item\em Return the self.\+strings\+\_\+processed which is a count. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a127b72da4998d5bdb908e59f51c652d8}{get\+\_\+valid}} (self)
+\begin{DoxyCompactList}\small\item\em Return the value in self.\+valid. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_aec2031a3c5b38240f7f7c5e702a81285}{next\+\_\+state\+\_\+recurse}} (self, in\+\_\+str)
+\begin{DoxyCompactList}\small\item\em Find the transition with the same state and symbol, then set the current state and call again. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a7b8ba69ad507d4215937f17424a169b5}{print\+\_\+self}} (self)
+\begin{DoxyCompactList}\small\item\em Prints variables stored in the class. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a69da294e9158ca41fff39c1c3152b96f}{process\+\_\+def}} (self, \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a584285fe507e7e46c15601255510836e}{from\+\_\+file}})
+\begin{DoxyCompactList}\small\item\em Given a definition file read the accept states and transitions from it. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_aa7686e478502243c2b0deb903cfb0a08}{process\+\_\+string}} (self, in\+\_\+string)
+\begin{DoxyCompactList}\small\item\em When given a string take the following actions\+: Check if processing the empty string would result in success, if yes cease processing. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_af894ad4821bc51313d309d4cabe720ee}{set\+\_\+accept\+\_\+states}}
+\begin{DoxyCompactList}\small\item\em Add list states to our list of transitions. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a99364809624a50f61fb859dd8c87813a}{set\+\_\+alphabet}} (self)
+\begin{DoxyCompactList}\small\item\em Given the transition table read all input symbols and setup the alphabet for the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}}. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_aaa9f224b31953da5ada0db6c434f05db}{set\+\_\+states}} (self)
+\begin{DoxyCompactList}\small\item\em Set the states of the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} based on tuples from \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} definition. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classfinite__automaton_1_1_f_a_a37e36ca6721cd99add8b761f89635496}{set\+\_\+transition}}
+\begin{DoxyCompactList}\small\item\em Add tuple t to our list of transitions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a97c201045f4931972aaf5e445839511f}\label{classfinite__automaton_1_1_f_a_a97c201045f4931972aaf5e445839511f}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a97c201045f4931972aaf5e445839511f}{accept\+\_\+states}}
+\begin{DoxyCompactList}\small\item\em accept\+\_\+states read from .fa file \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a9098e204b1b29281a1ce92393d654289}\label{classfinite__automaton_1_1_f_a_a9098e204b1b29281a1ce92393d654289}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a9098e204b1b29281a1ce92393d654289}{accepted\+\_\+strings}}
+\begin{DoxyCompactList}\small\item\em Strings that reached an \char`\"{}accept\char`\"{} state. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_abcbc32fc68e4323620d6171a17310212}\label{classfinite__automaton_1_1_f_a_abcbc32fc68e4323620d6171a17310212}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_abcbc32fc68e4323620d6171a17310212}{alphabet}}
+\begin{DoxyCompactList}\small\item\em alphabet of the input language \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_acc53c2cac20bdbeee95a9059618d7c25}{current\+\_\+state}}
+\begin{DoxyCompactList}\small\item\em state the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} is currently in. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_afdb4093922166fdf4211671955dc38fb}\label{classfinite__automaton_1_1_f_a_afdb4093922166fdf4211671955dc38fb}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_afdb4093922166fdf4211671955dc38fb}{epsilon\+\_\+trans}}
+\begin{DoxyCompactList}\small\item\em set of transitions with multiple \char`\"{}to\char`\"{} states \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a584285fe507e7e46c15601255510836e}{from\+\_\+file}}
+\begin{DoxyCompactList}\small\item\em which .fa file defined this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_aa19be6305a5a4485e1e70de70ed7d677}\label{classfinite__automaton_1_1_f_a_aa19be6305a5a4485e1e70de70ed7d677}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_aa19be6305a5a4485e1e70de70ed7d677}{states}}
+\begin{DoxyCompactList}\small\item\em set of states, derived from transition\+\_\+table \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a05042b6f922079000c39f929e1056db6}\label{classfinite__automaton_1_1_f_a_a05042b6f922079000c39f929e1056db6}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a05042b6f922079000c39f929e1056db6}{strings\+\_\+processed}}
+\begin{DoxyCompactList}\small\item\em Count of strings this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} has processed. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a267e15dcf00b71013391e54693d6ba80}\label{classfinite__automaton_1_1_f_a_a267e15dcf00b71013391e54693d6ba80}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a267e15dcf00b71013391e54693d6ba80}{transition\+\_\+table}}
+\begin{DoxyCompactList}\small\item\em transition function tuples from \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} file \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a51646327ac0a3287c4b08e4d28b66f35}\label{classfinite__automaton_1_1_f_a_a51646327ac0a3287c4b08e4d28b66f35}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a51646327ac0a3287c4b08e4d28b66f35}{valid}}
+\begin{DoxyCompactList}\small\item\em classification of the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} (N\+FA, D\+FA, I\+N\+V\+A\+L\+ID) \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a491206290c886a4aa57ec50978f79300}\label{classfinite__automaton_1_1_f_a_a491206290c886a4aa57ec50978f79300}} 
+\mbox{\hyperlink{classfinite__automaton_1_1_f_a_a491206290c886a4aa57ec50978f79300}{valid\+\_\+reason}}
+\begin{DoxyCompactList}\small\item\em why this classification? \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}Takes a file and sets the: accept state(s), transition table, alphabet.
+Given a string check that we can process the string.
+(char in string vs. alphabet), and then check whether the string ends in an accept state.
+\end{DoxyVerb}
+ 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_acc13390ea8996a5b9c95efec4ab3ac8c}\label{classfinite__automaton_1_1_f_a_acc13390ea8996a5b9c95efec4ab3ac8c}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+init\+\_\+\+\_\+@{\+\_\+\+\_\+init\+\_\+\+\_\+}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+init\+\_\+\+\_\+()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def \+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{def\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Initializes a finite automaton from a definition file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em def\+\_\+file} & m$\ast$.fa file in P\+J01\+\_\+runfiles \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a99687a41970ccfd859dacdf6ab41a0f1}\label{classfinite__automaton_1_1_f_a_a99687a41970ccfd859dacdf6ab41a0f1}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!build\+\_\+fa\+\_\+from\+\_\+file@{build\+\_\+fa\+\_\+from\+\_\+file}}
+\index{build\+\_\+fa\+\_\+from\+\_\+file@{build\+\_\+fa\+\_\+from\+\_\+file}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{build\+\_\+fa\+\_\+from\+\_\+file()}{build\_fa\_from\_file()}}
+{\footnotesize\ttfamily def build\+\_\+fa\+\_\+from\+\_\+file (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Using member variables create a finite automaton. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self param\mbox{[}in\mbox{]} self.\+from\+\_\+file Name of file where the definition is \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a3a87627d77810aed5976b4f053542b37}\label{classfinite__automaton_1_1_f_a_a3a87627d77810aed5976b4f053542b37}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+accept\+\_\+state\+\_\+range@{check\+\_\+accept\+\_\+state\+\_\+range}}
+\index{check\+\_\+accept\+\_\+state\+\_\+range@{check\+\_\+accept\+\_\+state\+\_\+range}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+accept\+\_\+state\+\_\+range()}{check\_accept\_state\_range()}}
+{\footnotesize\ttfamily def check\+\_\+accept\+\_\+state\+\_\+range (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Check if there is an accept state outside of \mbox{[}0,254\mbox{]} given in the definition file. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+accept\+\_\+states} & accept states for the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if accept state outside of \mbox{[}0,254\mbox{]} exists, 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_afffebaa358fefaf2b7ad69787744874a}\label{classfinite__automaton_1_1_f_a_afffebaa358fefaf2b7ad69787744874a}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+accept\+\_\+states@{check\+\_\+accept\+\_\+states}}
+\index{check\+\_\+accept\+\_\+states@{check\+\_\+accept\+\_\+states}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+accept\+\_\+states()}{check\_accept\_states()}}
+{\footnotesize\ttfamily def check\+\_\+accept\+\_\+states (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{line }\end{DoxyParamCaption})}
+
+
+
+If the line doesn\textquotesingle{}t match the regular expression of a line return 1 else return 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em line} & first line from m$\ast$.fa file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if the line matches 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_ac6ce3b4cc7d71b74ce160e55062a0402}\label{classfinite__automaton_1_1_f_a_ac6ce3b4cc7d71b74ce160e55062a0402}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+dupe\+\_\+tranisitons@{check\+\_\+dupe\+\_\+tranisitons}}
+\index{check\+\_\+dupe\+\_\+tranisitons@{check\+\_\+dupe\+\_\+tranisitons}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+dupe\+\_\+tranisitons()}{check\_dupe\_tranisitons()}}
+{\footnotesize\ttfamily def check\+\_\+dupe\+\_\+tranisitons (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Return 1 if there is a duplicate value in the list of (current\+\_\+state, symbol) 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+transition\+\_\+table} & transition table for the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if multiple transitions with the same (current state, symbol), 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a87734b6c31285c080862a62f00527d97}\label{classfinite__automaton_1_1_f_a_a87734b6c31285c080862a62f00527d97}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+empty\+\_\+string\+\_\+accept@{check\+\_\+empty\+\_\+string\+\_\+accept}}
+\index{check\+\_\+empty\+\_\+string\+\_\+accept@{check\+\_\+empty\+\_\+string\+\_\+accept}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+empty\+\_\+string\+\_\+accept()}{check\_empty\_string\_accept()}}
+{\footnotesize\ttfamily def check\+\_\+empty\+\_\+string\+\_\+accept (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+Check if this is machine accepts the empty string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if input string is empty, 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a50aac0972f155714c805126384813d1f}\label{classfinite__automaton_1_1_f_a_a50aac0972f155714c805126384813d1f}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+epsilon\+\_\+transitions@{check\+\_\+epsilon\+\_\+transitions}}
+\index{check\+\_\+epsilon\+\_\+transitions@{check\+\_\+epsilon\+\_\+transitions}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+epsilon\+\_\+transitions()}{check\_epsilon\_transitions()}}
+{\footnotesize\ttfamily def check\+\_\+epsilon\+\_\+transitions (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Check if the transition table contains epsilon values. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+transition\+\_\+table} & transition table for the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if there are epsilon transitions, 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a1a8126235389c671e1a4f23895154162}\label{classfinite__automaton_1_1_f_a_a1a8126235389c671e1a4f23895154162}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+final\+\_\+symbol\+\_\+accept@{check\+\_\+final\+\_\+symbol\+\_\+accept}}
+\index{check\+\_\+final\+\_\+symbol\+\_\+accept@{check\+\_\+final\+\_\+symbol\+\_\+accept}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+final\+\_\+symbol\+\_\+accept()}{check\_final\_symbol\_accept()}}
+{\footnotesize\ttfamily def check\+\_\+final\+\_\+symbol\+\_\+accept (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+If the char doesn\textquotesingle{}t transition to an accept state then the alphabet isn\textquotesingle{}t worth processing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em in\+\_\+string} & string to check final symbol \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 0 if the final symbol doesn\textquotesingle{}t lead to an accept state 1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_ae2909d69bb02d15bdf17c808106e35d7}\label{classfinite__automaton_1_1_f_a_ae2909d69bb02d15bdf17c808106e35d7}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+in\+\_\+str\+\_\+alphabet@{check\+\_\+in\+\_\+str\+\_\+alphabet}}
+\index{check\+\_\+in\+\_\+str\+\_\+alphabet@{check\+\_\+in\+\_\+str\+\_\+alphabet}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+in\+\_\+str\+\_\+alphabet()}{check\_in\_str\_alphabet()}}
+{\footnotesize\ttfamily def check\+\_\+in\+\_\+str\+\_\+alphabet (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+If any character in the string isn\textquotesingle{}t in the alphabet stop processing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em in\+\_\+string} & string whose alphabet needs checking \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if all characters in the alphabet, 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a5807041a61c4627c67836cd425522675}\label{classfinite__automaton_1_1_f_a_a5807041a61c4627c67836cd425522675}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!check\+\_\+transition\+\_\+state\+\_\+range@{check\+\_\+transition\+\_\+state\+\_\+range}}
+\index{check\+\_\+transition\+\_\+state\+\_\+range@{check\+\_\+transition\+\_\+state\+\_\+range}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{check\+\_\+transition\+\_\+state\+\_\+range()}{check\_transition\_state\_range()}}
+{\footnotesize\ttfamily def check\+\_\+transition\+\_\+state\+\_\+range (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Check if any transition takes \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} to a state outside valid range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+boolean 1 if a transition goes outside of \mbox{[}0,255\mbox{]}, 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a279deb94ddb3198fe1cc36a981f87550}\label{classfinite__automaton_1_1_f_a_a279deb94ddb3198fe1cc36a981f87550}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!fa\+\_\+type@{fa\+\_\+type}}
+\index{fa\+\_\+type@{fa\+\_\+type}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{fa\+\_\+type()}{fa\_type()}}
+{\footnotesize\ttfamily def fa\+\_\+type (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+The \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} has been defined based on the file. 
+
+Purpose current info to check the type (N\+FA) multiple transition rules with the same current\+\_\+state and symbol (N\+FA) epsilon transition rules, where \textquotesingle{}`' used (I\+N\+V\+A\+L\+ID) transitions from/to states not in \mbox{[}0,255\mbox{]} (I\+N\+V\+A\+L\+ID) accept states contain values not in \mbox{[}0,255) 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self param\mbox{[}in\mbox{]} self.\+valid D\+F\+A/\+N\+F\+A/\+I\+N\+V\+A\+L\+ID depending on logic param\mbox{[}in\mbox{]} self.\+valid\+\_\+reason explanation of self.\+valid \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a34e4c3a2ff6279ae393c6aa71b6a6c67}\label{classfinite__automaton_1_1_f_a_a34e4c3a2ff6279ae393c6aa71b6a6c67}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!finalize\+\_\+fa@{finalize\+\_\+fa}}
+\index{finalize\+\_\+fa@{finalize\+\_\+fa}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{finalize\+\_\+fa()}{finalize\_fa()}}
+{\footnotesize\ttfamily def finalize\+\_\+fa (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Create an F\+A\+\_\+\+Logger and call it on the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} to log values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a8e18faca5cb09062bcef65e75ab2ba29}\label{classfinite__automaton_1_1_f_a_a8e18faca5cb09062bcef65e75ab2ba29}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!get\+\_\+alphabet@{get\+\_\+alphabet}}
+\index{get\+\_\+alphabet@{get\+\_\+alphabet}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{get\+\_\+alphabet()}{get\_alphabet()}}
+{\footnotesize\ttfamily def get\+\_\+alphabet (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Returns the alphabet. 
+
+Called from logger 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} alphabet 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a50297a5bd3019015c230357f0e48e7d8}\label{classfinite__automaton_1_1_f_a_a50297a5bd3019015c230357f0e48e7d8}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!get\+\_\+dupe\+\_\+set@{get\+\_\+dupe\+\_\+set}}
+\index{get\+\_\+dupe\+\_\+set@{get\+\_\+dupe\+\_\+set}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{get\+\_\+dupe\+\_\+set()}{get\_dupe\_set()}}
+{\footnotesize\ttfamily def get\+\_\+dupe\+\_\+set (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Checks the transition table for entries that have (current state, symbol) and returns them. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em } & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_ab4dea73d1d875356d9cdde9ade8dd32e}\label{classfinite__automaton_1_1_f_a_ab4dea73d1d875356d9cdde9ade8dd32e}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!get\+\_\+states@{get\+\_\+states}}
+\index{get\+\_\+states@{get\+\_\+states}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{get\+\_\+states()}{get\_states()}}
+{\footnotesize\ttfamily def get\+\_\+states (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Return the states in this machine. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+states} & set of states for this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} states 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a7e50b6bf5e22b78a0fa7a2fdfc0a41e0}\label{classfinite__automaton_1_1_f_a_a7e50b6bf5e22b78a0fa7a2fdfc0a41e0}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!get\+\_\+strings\+\_\+processed@{get\+\_\+strings\+\_\+processed}}
+\index{get\+\_\+strings\+\_\+processed@{get\+\_\+strings\+\_\+processed}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{get\+\_\+strings\+\_\+processed()}{get\_strings\_processed()}}
+{\footnotesize\ttfamily def get\+\_\+strings\+\_\+processed (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Return the self.\+strings\+\_\+processed which is a count. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+strings\+\_\+processed} & count of strings processed by this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the strings processed by the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a127b72da4998d5bdb908e59f51c652d8}\label{classfinite__automaton_1_1_f_a_a127b72da4998d5bdb908e59f51c652d8}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!get\+\_\+valid@{get\+\_\+valid}}
+\index{get\+\_\+valid@{get\+\_\+valid}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{get\+\_\+valid()}{get\_valid()}}
+{\footnotesize\ttfamily def get\+\_\+valid (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Return the value in self.\+valid. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+valid} & machines validity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} valid (D\+F\+A/\+N\+F\+A/\+I\+N\+V\+A\+L\+ID) 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_aec2031a3c5b38240f7f7c5e702a81285}\label{classfinite__automaton_1_1_f_a_aec2031a3c5b38240f7f7c5e702a81285}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!next\+\_\+state\+\_\+recurse@{next\+\_\+state\+\_\+recurse}}
+\index{next\+\_\+state\+\_\+recurse@{next\+\_\+state\+\_\+recurse}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{next\+\_\+state\+\_\+recurse()}{next\_state\_recurse()}}
+{\footnotesize\ttfamily def next\+\_\+state\+\_\+recurse (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+str }\end{DoxyParamCaption})}
+
+
+
+Find the transition with the same state and symbol, then set the current state and call again. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a7b8ba69ad507d4215937f17424a169b5}\label{classfinite__automaton_1_1_f_a_a7b8ba69ad507d4215937f17424a169b5}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!print\+\_\+self@{print\+\_\+self}}
+\index{print\+\_\+self@{print\+\_\+self}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{print\+\_\+self()}{print\_self()}}
+{\footnotesize\ttfamily def print\+\_\+self (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Prints variables stored in the class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a69da294e9158ca41fff39c1c3152b96f}\label{classfinite__automaton_1_1_f_a_a69da294e9158ca41fff39c1c3152b96f}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!process\+\_\+def@{process\+\_\+def}}
+\index{process\+\_\+def@{process\+\_\+def}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{process\+\_\+def()}{process\_def()}}
+{\footnotesize\ttfamily def process\+\_\+def (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{from\+\_\+file }\end{DoxyParamCaption})}
+
+
+
+Given a definition file read the accept states and transitions from it. 
+
+Then call function on teh values read in to fill out member variables. 
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt in}  & {\em self.\+from\+\_\+file} & name of the file defining this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\mbox{\tt in}  & {\em self.\+current\+\_\+state} & start state of the machine \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_aa7686e478502243c2b0deb903cfb0a08}\label{classfinite__automaton_1_1_f_a_aa7686e478502243c2b0deb903cfb0a08}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!process\+\_\+string@{process\+\_\+string}}
+\index{process\+\_\+string@{process\+\_\+string}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{process\+\_\+string()}{process\_string()}}
+{\footnotesize\ttfamily def process\+\_\+string (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+string }\end{DoxyParamCaption})}
+
+
+
+When given a string take the following actions\+: Check if processing the empty string would result in success, if yes cease processing. 
+
+Check that the final symbol in the string would lead to an accept state, cease processing if not. Check that the input string is in the acceptable alphabet, cease processing if not. Else advance through the states with next\+\_\+state\+\_\+recurse(symbol) and check that we\textquotesingle{}re at an accept state after 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em in\+\_\+string} & string to be tested against \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} definition \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_af894ad4821bc51313d309d4cabe720ee}\label{classfinite__automaton_1_1_f_a_af894ad4821bc51313d309d4cabe720ee}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!set\+\_\+accept\+\_\+states@{set\+\_\+accept\+\_\+states}}
+\index{set\+\_\+accept\+\_\+states@{set\+\_\+accept\+\_\+states}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{set\+\_\+accept\+\_\+states()}{set\_accept\_states()}}
+{\footnotesize\ttfamily def set\+\_\+accept\+\_\+states (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{in\+\_\+states }\end{DoxyParamCaption})}
+
+
+
+Add list states to our list of transitions. 
+
+Dupes handled by set 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em in\+\_\+states} & list of states \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a99364809624a50f61fb859dd8c87813a}\label{classfinite__automaton_1_1_f_a_a99364809624a50f61fb859dd8c87813a}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!set\+\_\+alphabet@{set\+\_\+alphabet}}
+\index{set\+\_\+alphabet@{set\+\_\+alphabet}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{set\+\_\+alphabet()}{set\_alphabet()}}
+{\footnotesize\ttfamily def set\+\_\+alphabet (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Given the transition table read all input symbols and setup the alphabet for the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_aaa9f224b31953da5ada0db6c434f05db}\label{classfinite__automaton_1_1_f_a_aaa9f224b31953da5ada0db6c434f05db}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!set\+\_\+states@{set\+\_\+states}}
+\index{set\+\_\+states@{set\+\_\+states}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{set\+\_\+states()}{set\_states()}}
+{\footnotesize\ttfamily def set\+\_\+states (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Set the states of the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} based on tuples from \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} definition. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em self} & pointer to self \\
+\hline
+\mbox{\tt out}  & {\em self.\+states} & states in the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a37e36ca6721cd99add8b761f89635496}\label{classfinite__automaton_1_1_f_a_a37e36ca6721cd99add8b761f89635496}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!set\+\_\+transition@{set\+\_\+transition}}
+\index{set\+\_\+transition@{set\+\_\+transition}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{set\+\_\+transition()}{set\_transition()}}
+{\footnotesize\ttfamily def set\+\_\+transition (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{delta }\end{DoxyParamCaption})}
+
+
+
+Add tuple t to our list of transitions. 
+
+Dupes handled by set 
+\begin{DoxyParams}{Parameters}
+{\em self} & pointer to self \\
+\hline
+{\em delta\+:tuple} & tuple to be added to the tranition table \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classfinite__automaton_1_1_f_a_acc53c2cac20bdbeee95a9059618d7c25}\label{classfinite__automaton_1_1_f_a_acc53c2cac20bdbeee95a9059618d7c25}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!current\+\_\+state@{current\+\_\+state}}
+\index{current\+\_\+state@{current\+\_\+state}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{current\+\_\+state}{current\_state}}
+{\footnotesize\ttfamily current\+\_\+state}
+
+
+
+state the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} is currently in. 
+
+Open a file and take a definition.
+
+Default start 0
+
+What is the \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} type? What symbols are in the alphabet Get the states After processing definition set the current state \mbox{\Hypertarget{classfinite__automaton_1_1_f_a_a584285fe507e7e46c15601255510836e}\label{classfinite__automaton_1_1_f_a_a584285fe507e7e46c15601255510836e}} 
+\index{finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}!from\+\_\+file@{from\+\_\+file}}
+\index{from\+\_\+file@{from\+\_\+file}!finite\+\_\+automaton\+::\+FA@{finite\+\_\+automaton\+::\+FA}}
+\subsubsection{\texorpdfstring{from\+\_\+file}{from\_file}}
+{\footnotesize\ttfamily from\+\_\+file}
+
+
+
+which .fa file defined this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}} 
+
+Record which file defined this \mbox{\hyperlink{classfinite__automaton_1_1_f_a}{FA}}. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+code/finite\+\_\+automaton.\+py\end{DoxyCompactItemize}

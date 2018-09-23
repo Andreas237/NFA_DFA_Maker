@@ -1,4 +1,9 @@
 # Running the code
+Author: Andreas Slovacek
+Date: 23 September 2018
+
+
+
 ## System Requirements
 * Unix based OS
 * Python 3.x

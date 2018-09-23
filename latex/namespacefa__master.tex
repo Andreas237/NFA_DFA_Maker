@@ -1,0 +1,32 @@
+\hypertarget{namespacefa__master}{}\section{fa\+\_\+master Namespace Reference}
+\label{namespacefa__master}\index{fa\+\_\+master@{fa\+\_\+master}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfa__master_1_1_f_a___master}{F\+A\+\_\+\+Master}}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacefa__master_a9336ebf25087d91c818ee6e9ec29f8c1}\label{namespacefa__master_a9336ebf25087d91c818ee6e9ec29f8c1}} 
+{\bfseries x} = \mbox{\hyperlink{classfa__master_1_1_f_a___master}{F\+A\+\_\+\+Master}}()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@package fa_master
+
+Author: Andreas Slovacek
+
+Main function for PJ01, see PJ01.pdf for project spec. Order of operations:
+Creates the FAs with self.build_fas()
+Processes strings with
+
+Lessons learned:
+- Opening files using "with open(...)" automatically closes the file at the
+    end of the statement
+- list(f) on an open file returns a list with each line
+- globs, see list_definition_files, allow you to get all the files in a dir
+using a regex
+\end{DoxyVerb}
+ 

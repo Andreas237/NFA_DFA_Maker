@@ -1,0 +1,92 @@
+Author\+: Andreas Slovacek Date\+: 23 September 2018
+
+\subsection*{System Requirements}
+
+
+\begin{DoxyItemize}
+\item Unix based OS
+\item Python 3.\+x
+\item Tested on O\+SX 10.\+13.\+4; Kali Gnu/\+Linux Rolling
+\end{DoxyItemize}
+
+\subsection*{Knowing the the files}
+
+Functions are listed in the order they are called.
+
+\subsubsection*{fa\+\_\+master.\+py}
+
+Master script. Reads directories and passes definition files to FA constructor and string processor
+
+
+\begin{DoxyItemize}
+\item {\ttfamily run(self)} calls sub-\/functions
+\begin{DoxyItemize}
+\item {\ttfamily build\+\_\+fas(self)} calls sub-\/function to scan directory for .fa files, then passes those to the FA constructor
+\item {\ttfamily get\+\_\+input\+\_\+strings(self,input\+\_\+file)} creates an iterable list of all strings from {\itshape input.\+txt}
+\item Run then calls on each FA to {\ttfamily process\+\_\+string()}
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsubsection*{finite\+\_\+automaton.\+py}
+
+Implementation of N\+FA. D\+FA functionality handled the same as the N\+FA, except strings containing epsilon transitions aren\textquotesingle{}t processed.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily process\+\_\+def(self,from\+\_\+file)} set\textquotesingle{}s up a Finite Automaton based on a .fa files definition. ~\newline
+ $\ast$ {\ttfamily fa\+\_\+type()} determines the type of the FA by checking duplicate transitions, epsilon tranisitons, invalid accepts states, accept state range, state range
+\begin{DoxyItemize}
+\item {\ttfamily set\+\_\+alphabet()} extracts the alphabet from the transition table
+\item {\ttfamily set\+\_\+states()} extracts the states from the transition table
+\item {\ttfamily get\+\_\+dupe\+\_\+set()} extracts duplicate transitions from the transition table
+\end{DoxyItemize}
+\item {\ttfamily process\+\_\+string(in\+\_\+string)} used to test strings in the FA. The current states is reset with every string processed. I\+F-\/\+E\+L\+I\+F-\/\+E\+L\+SE finds reasons to cease processing. Otherwise process the string, check if it ended in an accept state, and save the string if it did.
+\begin{DoxyItemize}
+\item {\ttfamily self.\+strings\+\_\+processed} tracks how many strings this FA has processed
+\item {\ttfamily next\+\_\+state\+\_\+recurse(in\+\_\+str)} recursively processes the string and shifts states
+\end{DoxyItemize}
+\item {\ttfamily finalize\+\_\+fa()} Logs the FA values in results/basename.\+log and echos the accepted strings into results/basename.\+txt. Called from {\ttfamily fa\+\_\+master.\+py}
+\item {\ttfamily print\+\_\+self()} Call after {\ttfamily process\+\_\+def} to print the FA to C\+LI
+\end{DoxyItemize}
+
+\subsubsection*{fa\+\_\+logger.\+py}
+
+Handles file and directory operations.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily log\+\_\+\+F\+A(\+F\+A)} Takes an FA as parameter, sets up and writes log files
+\begin{DoxyItemize}
+\item {\ttfamily set\+\_\+filenames(filename)} creates a directory for results if needed and sets directory/filenames for the .log and .txt file associated with this FA
+\item {\ttfamily remove\+\_\+previous\+\_\+files()} deletes any existing .log and .txt files
+\item {\ttfamily create\+\_\+log\+\_\+file(\+F\+A)} writes (Valid,States,Alphabet,Accepted Strings) to .log file with input parameter FA\textquotesingle{}s member variables
+\item {\ttfamily create\+\_\+txt\+\_\+file(\+F\+A)} writes accepted strings to .txt with input parameter FA\textquotesingle{}s member variables
+\end{DoxyItemize}
+\end{DoxyItemize}
+
+\subsubsection*{cleanup.\+sh}
+
+Cleans residual $\ast$.log$\ast$ and $\ast$.txt$\ast$ files in P\+J01/results
+
+\subsubsection*{code/}
+
+Contains the Python files
+
+\subsubsection*{results/}
+
+Contains the output $\ast$.log$\ast$ and $\ast$.txt$\ast$ files generated in fa\+\_\+logger.\+py
+
+\section*{N\+F\+A\+\_\+\+D\+F\+A\+\_\+\+Maker}
+
+Finite Automaton creator and classifier based on $\ast$\+\_\+\+P\+J01.pdf\+\_\+$\ast$
+
+In this project you will write a program that will read a simplified description of a finite automaton, validate it, and then simulate it on each string read from an input text file. Each string that is accepted by the D\+FA will be echoed to a text file; in addition each machine will have a log file prepared containing specific pieces of information.
+
+To avoid operating-\/specific case-\/sensitivity issues, all filenames will be all lowercase. So that all of the files can be in the same directory and the following naming conventions will be used\+:
+\begin{DoxyItemize}
+\item Base name\+: mxx where xx is a two digit number. The first machine will have a base name of m00 and the remaining machines will be numbered sequentially. This should allow you to write a wrapper program that processes all of the machines in a single run.
+\item Machine description file\+: basename.\+fa
+\item Accepted strings\+: basename.\+txt
+\item Log file\+: basename.\+log
+\item Input file\+: strings.\+txt (the same file for all machines) 
+\end{DoxyItemize}

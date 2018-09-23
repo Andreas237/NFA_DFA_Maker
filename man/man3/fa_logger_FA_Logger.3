@@ -1,0 +1,146 @@
+.TH "FA_Logger" 3 "Sun Sep 23 2018" "PJ01" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+FA_Logger
+.SH SYNOPSIS
+.br
+.PP
+.SS "Public Member Functions"
+
+.in +1c
+.ti -1c
+.RI "def \fB__init__\fP (self)"
+.br
+.RI "Initialize the logger fields\&. "
+.ti -1c
+.RI "def \fBcreate_log_file\fP (self, FA)"
+.br
+.RI "Create \&.log file with required fields\&. "
+.ti -1c
+.RI "def \fBcreate_txt_file\fP (self, FA)"
+.br
+.RI "Print accepted strings to a text file\&. "
+.ti -1c
+.RI "def \fBlog_FA\fP (self, FA)"
+.br
+.RI "Takes an FA and creates a file with the specified format\&. "
+.ti -1c
+.RI "def \fBremove_previous_files\fP (self)"
+.br
+.RI "If there is an existing log file or text file, delete it\&. "
+.ti -1c
+.RI "def \fBset_filenames\fP (self, filename)"
+.br
+.RI "Set the name of the file to be created, make sure the results/ exists, set the names of the \&.log and \&.txt files\&. "
+.in -1c
+.SS "Public Attributes"
+
+.in +1c
+.ti -1c
+.RI "\fBbasename\fP"
+.br
+.RI "basename as given in PJ01\&.pdf "
+.ti -1c
+.RI "\fBlogfile\fP"
+.br
+.RI "output filename, created using basename + \&.log "
+.ti -1c
+.RI "\fBtxt\fP"
+.br
+.RI "output filename, created using basename + \&.txt "
+.in -1c
+.SH "Detailed Description"
+.PP 
+
+.PP
+.nf
+FA_Logger
+    Meet the requirements defined in the project spec for "Log file - basename.log" and "Output file - basename.txt"
+    Logs the following:
+        * "Valid: " and the FA classification
+        * "Alphabet: " and every character read in the alphabet.  REMOVE "`" from alphabet
+        * "Accepted strings: " "a / m" where a = count(accepted strings) m = count(input strings)
+        * 0/0 for INVALID FAs
+
+.fi
+.PP
+ 
+.SH "Constructor & Destructor Documentation"
+.PP 
+.SS "def __init__ ( self)"
+
+.PP
+Initialize the logger fields\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SH "Member Function Documentation"
+.PP 
+.SS "def create_log_file ( self,  FA)"
+
+.PP
+Create \&.log file with required fields\&. Get the values from the FA\&. Logic applied to VALID\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIFA\fP a finite automaton 
+.br
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def create_txt_file ( self,  FA)"
+
+.PP
+Print accepted strings to a text file\&. Create the text file as needed\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIFA\fP a finite automaton 
+.br
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def log_FA ( self,  FA)"
+
+.PP
+Takes an FA and creates a file with the specified format\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def remove_previous_files ( self)"
+
+.PP
+If there is an existing log file or text file, delete it\&. Fail silently 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+.SS "def set_filenames ( self,  filename)"
+
+.PP
+Set the name of the file to be created, make sure the results/ exists, set the names of the \&.log and \&.txt files\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIself\fP pointer to self 
+.RE
+.PP
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for PJ01 from the source code\&.
