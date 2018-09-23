@@ -13,7 +13,9 @@
 
 import glob
 import os
+import time
 from finite_automaton import FA
+from progress_bar import loadingBar
 
 
 
@@ -32,9 +34,9 @@ from finite_automaton import FA
 #   TODO: feed input text to each FA
 class FA_Master:
 
-    file_prefix     = 'PJ01_runfiles/m'                 # prefix of FA definition files
+    file_prefix     = '../PJ01_runfiles/m'                 # prefix of FA definition files
     file_suffix     = '.fa'                             # suffix of FA definition files
-    test_str_file   = 'PJ01_runfiles/input.txt'         # file containing test strings
+    test_str_file   = '../PJ01_runfiles/input.txt'         # file containing test strings
 
 
 
@@ -43,12 +45,12 @@ class FA_Master:
     # \fn def __init__(self)
     # \purpose no need to set init behavior...
     def __init__(self):
-        self.files                  = []                # Files read into FAs
-        self.fa_list                = []                # {filename:FA} pairs
-        self.file_prefix            = 'm'               # prefix of FA definition files
-        self.file_suffix            = '.fa'             # suffix of FA definition files
-        self.file_dir               = 'PJ01_runfiles/'  # subdirectory of FA definition files
-        self.in_strings             = []                # Strings to pass to FAs
+        self.files          = []                # Files read into FAs
+        self.fa_list        = []                # {filename:FA} pairs
+        self.file_prefix    = 'm'               # prefix of FA definition files
+        self.file_suffix    = '.fa'             # suffix of FA definition files
+        self.file_dir       = '../PJ01_runfiles/'  # subdirectory of FA definition files
+        self.in_strings     = []                # Strings to pass to FAs
 
     #end def __init__(self)
 
@@ -62,12 +64,12 @@ class FA_Master:
     # \purpose build the dict of FAs and their associated file
     def build_fas(self):
         definition_files = self.list_definition_files()
-
+        print("Building FAs")
         for file in definition_files:
             temp_fa = FA(file)
             self.fa_list.append(temp_fa)
 
-        self.print_built_fas()
+        print("FA_MASTER.build_fas():    Read %(ct)d FAs from defintion files.\nContinuing process." %{'ct':len(self.fa_list)})
     # end def build_fas(self)
 
 
@@ -85,11 +87,11 @@ class FA_Master:
                 self.in_strings = list(f)
 
         except PermissionError as e:
-            print("ERROR: Couldn't open %(f)s" % {'f':in_file} )
+            print("ERROR: Couldn't open " + in_file )
             return 0
 
         except FileNotFoundError as e:
-            print("ERROR: %(f)s doesn't exist!" % {'f':in_file} )
+            print("ERROR: " + in_file + " doesn't exist!")
             return 0
         else:
             return 1
@@ -133,32 +135,38 @@ class FA_Master:
     # \fn def run(self):
     # \brief builds the FAs, get the input strings, try all strings in all FAs
     def run(self):
+        # START tracks the beginning of the process
+        start = time.time()
 
+        #
         self.build_fas()
 
-        successful_fas = []
-        failed_fas = []
 
         # Get the input strings from file
+        print("Getting input strings")
         if self.get_input_strings(self.test_str_file) != 1:
             raise NameError('ERROR:  fa_master.get_input_strings() failed to open input text')
 
 
-        for fa in self.fa_list:
-            for test_string in self.in_strings:
-                fa.process_string(test_string)
-            fa.finalize_fa()
+
+        # TOTAL  and COUNT used for the progress bar
+        total = len(self.fa_list)*len(self.in_strings)
+        count = 0
 
 
-
-        if ( len(fa.accepted_strings) > 0 ):
-            successful_fas.append(fa)
-        else:
-            failed_fas.append(fa)
-        print("This many failed: " + str(len(failed_fas)))
-        print("This many succeeded: " + str(len(successful_fas)))
-
-
+        # For each FA in self.fa_list pass it all the strings extracted from
+        # input.txt
+        print("Running input strings through FAs:")
+        for fai in range(len(self.fa_list)):
+            for ts in range(len(self.in_strings)):
+                count += 1                  # used for loadingBar
+                loadingBar(count,total,1)   # so you know the program hasn't frozen
+                self.fa_list[fai].process_string(self.in_strings[ts])
+            # Finalize executes logging
+            self.fa_list[fai].finalize_fa()
+        print()
+        # Print the total execution time to the CLI
+        print("Execution time= {0:.5f}".format(time.time() - start))
     # end def run(self)
 
 
@@ -172,9 +180,4 @@ class FA_Master:
 
 
 x = FA_Master()
-#y.process_def("PJ01_runfiles/made_up.fa")
-#y.process_string('1a1`0 1 b a')
-#y.finalize_fa()
-
-#x.list_definition_files()
 x.run()

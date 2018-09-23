@@ -1,6 +1,5 @@
 import os
 import sys  # determine platform for directory operations
-#   "States: " number of states in the FA, plus state 255
 ##################################################################################
 # CLASS: FA_Logger
 ##################################################################################
@@ -39,8 +38,8 @@ class FA_Logger:
                 os.mknod(self.logfile,mode=666)
 
             f = open(self.logfile, 'w')
-
-            f.write( 'Valid: ' + FA.get_valid() + '\n')
+            valid = FA.get_valid()
+            f.write( 'Valid: ' + valid + '\n')
 
             f.write( 'States: ' + str(len(FA.get_states())) + '\n')
 
@@ -48,8 +47,12 @@ class FA_Logger:
             for i in FA.get_alphabet():
                 tmp = tmp + i
             f.write( 'Alphabet: ' + tmp + '\n' )
+            # If invalid log 0/0
+            if(valid == 'INVALID'):
+                f.write('Accepted Strings: 0 / 0\n')
+            else:
+                f.write('Accepted Strings: ' + str(len(FA.get_accepted_strings())) + '/'+ str(FA.get_strings_processed()) + '\n')
 
-            f.write('Accepted Strings: ' + str(len(FA.get_accepted_strings())) + '/'+ str(FA.get_strings_processed()) + '\n')
         except PermissionError:
             print("Couldn't open %(f)s for logging" % {'f':self.logfile} )
 
@@ -75,7 +78,6 @@ class FA_Logger:
                 os.mknod(self.txt,mode=666)
 
             f = open(self.txt, 'w')
-
             for s in FA.get_accepted_strings():
                 f.write(s + '\n')
         except PermissionError:
@@ -131,9 +133,13 @@ class FA_Logger:
     # \fn def set_filenames(self,filename)
     # set the names of the files we will use
     def set_filenames(self,filename):
-        self.basename = filename.replace('.fa','')
-        self.basename = self.basename[ self.basename.find("/") + 1 : ]
-        self.basename = "Output_files/" + self.basename
+        index = filename.find('m')
+        self.basename = filename[index:].replace('.fa','')
+        #self.basename = self.basename[ self.basename.find("/") + 1 : ]
+        #self.basename = "Output_files/" + self.basename
+        if( not os.path.exists("../results/")):
+            os.makedirs("../results/")
+        self.basename = "../results/" + self.basename
         self.logfile = self.basename + '.log'
         self.txt = self.basename + '.txt'
     # end # \fn def set_filenames(self,filename)
