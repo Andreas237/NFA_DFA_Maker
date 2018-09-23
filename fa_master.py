@@ -14,6 +14,7 @@
 import glob
 import os
 from finite_automaton import FA
+from progress_bar import loadingBar
 
 
 
@@ -34,7 +35,7 @@ class FA_Master:
 
     file_prefix     = 'PJ01_runfiles/m'                 # prefix of FA definition files
     file_suffix     = '.fa'                             # suffix of FA definition files
-    test_str_file   = 'PJ01_runfiles/input.txt'         # file containing test strings
+    test_str_file   = 'PJ01_runfiles/input_test.txt'         # file containing test strings
 
 
 
@@ -67,7 +68,7 @@ class FA_Master:
             temp_fa = FA(file)
             self.fa_list.append(temp_fa)
 
-        self.print_built_fas()
+        print("FA_MASTER.build_fas():    FAs read from defintion file.\nContinuing process.\n")
     # end def build_fas(self)
 
 
@@ -144,19 +145,17 @@ class FA_Master:
             raise NameError('ERROR:  fa_master.get_input_strings() failed to open input text')
 
 
-        for fa in self.fa_list:
-            for test_string in self.in_strings:
-                fa.process_string(test_string)
-            fa.finalize_fa()
 
 
+        total = len(self.fa_list)*len(self.in_strings)
+        count = 0
+        for fai in range(len(self.fa_list)):
+            for ts in range(len(self.in_strings)):
+                count += 1
+                loadingBar(count,total,1)
+                self.fa_list[fai].process_string(self.in_strings[ts])
+            self.fa_list[fai].finalize_fa()
 
-        if ( len(fa.accepted_strings) > 0 ):
-            successful_fas.append(fa)
-        else:
-            failed_fas.append(fa)
-        print("This many failed: " + str(len(failed_fas)))
-        print("This many succeeded: " + str(len(successful_fas)))
 
 
     # end def run(self)

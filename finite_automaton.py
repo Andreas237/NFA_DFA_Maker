@@ -50,7 +50,7 @@ class delta:
         self.set_delta(delta)
 
     # get the transition function
-    def get_delta(self):
+    def elta(self):
         return (self.current_state, self.symbol, self.next_state)
 
 
@@ -99,13 +99,14 @@ class FA:
         self.accept_states       = set()     # accept_states read from .fa file
         self.accepted_strings    = []        # Strings that reached an "accept" state
         self.alphabet            = set()     # alphabet of the input language
-        self.valid      = ''                 # classification of the FA (NFA, DFA, INVALID)
-        self.valid_reason        = ''        # why this classification?
-        self.current_state       = '0'         # state the FA is currently in.  Default start 0
+        self.current_state       = '0'       # state the FA is currently in.  Default start 0
+        self.epsilon_trans       = set()     # set of transitions with multiple "to" states
         self.from_file           = ''        # which .fa file defined this FA
         self.states              = set()     # set of states, derived from transition_table
         self.strings_processed   = 0
         self.transition_table    = set()     # transition function tuples from FA file
+        self.valid               = ''        # classification of the FA (NFA, DFA, INVALID)
+        self.valid_reason        = ''        # why this classification?
         self.process_def(def_file)
     # \fn def __init__(self)
 
@@ -370,6 +371,8 @@ class FA:
 
 
     # \fn def finalize_fa(self)
+    # \brief Create an FA_Logger and call it on the FA
+    # \param[out] Creates log and txt files for the FA
     def finalize_fa(self):
         me = FA_Logger()
         me.log_FA(self)
@@ -380,6 +383,8 @@ class FA:
 
 
     # \fn def get_accepted_strings(self)
+    # \brief gets the accepted strings.  Called from logger
+    # \return strings the FA has accepted
     def get_accepted_strings(self):
         return self.accepted_strings
     # end def get_accepted_strings(self)
@@ -390,6 +395,8 @@ class FA:
 
 
     # \fn def get_alphabet(self)
+    # \brief gets the alphabet.  Called from logger
+    # \return the FA alphabet
     def get_alphabet(self):
         return self.alphabet
     # end def get_alphabet(self)
@@ -399,7 +406,37 @@ class FA:
 
 
 
+    # \fn def e_set(self,symbol)
+    # \brief Checks the transition table for entries that have (current state,
+    #        symbol) and returns them.
+    # \ return dupes set() of possible duplicates
+    def get_dupe_set(self):
+        dupes = set()
+        for delta in self.transition_table:
+            # Copy the table each time, and remove the current delta
+            temp = self.transition_table.copy()
+            temp.remove(delta)
+
+            # Check delta against all other transitions
+            for j in temp:
+                for a in self.alphabet:
+                    # Are the current states the same?
+                    if( delta[0] == self.current_state):
+                        if(j[0] == self.current_state ):
+                            # Are the symbols the same?
+                            if( delta[1] == a):
+                                if(j[1] == a ):
+                                    self.epsilon_trans.add(j)
+
+    # end def get_dupe_set(self,symbol)
+
+
+
+
+
+
     # \fn def get_states(self)
+    # \return the FA states
     def get_states(self):
         return self.states
     # end def get_states(self)
@@ -410,6 +447,7 @@ class FA:
 
 
     # \fn def get_strings_processed(self)
+    # \return the strings processed by the FA
     def get_strings_processed(self):
         return self.strings_processed
     # end def get_strings_processed(self)
@@ -420,6 +458,7 @@ class FA:
 
 
     # \fn def get_classification(self)
+    # \return the FA valid (DFA/NFA/INVALID)
     def get_valid(self):
         return self.valid
     # end def get_classification(self)
@@ -448,6 +487,45 @@ class FA:
 
 
 
+    # \fn def next_state_recurse(self,in_char)
+    def next_state_recurse(self,in_str):
+
+        # find the transition with the same state and symbol, then set the
+        # the current state and call again
+        if( len(in_str) - 1):
+            for transition in self.transition_table:
+                if self.current_state == transition[0]:
+                    if transition[1] == in_str[0] :
+                        self.current_state = transition[2]
+                        break
+            print("In next_state_recurse with " + in_str)
+            self.next_state_recurse(in_str[1:])
+        else:
+            print("In next_state_recurse returning none")
+            return None
+    # end def next_state_recurse(self,in_char)
+
+
+
+
+
+
+    # \fn def next_state_check(self,in_char)
+    # \brief get epsilon-transitions functions associated with in_char
+    def next_state_check(self,in_char):
+        if( len(self.epsilon_trans) > 0 ):
+            dupes = []
+            for i in self.epsilon_trans:
+                if i[1] == in_char:
+                    dupes.append(i)
+        return dupes
+    # end def next_state_check(self,in_char)
+
+
+
+
+
+
     # \fn def print_self
     # Prints variables stored in the class
     def print_self(self):
@@ -458,6 +536,7 @@ class FA:
         print("Alphabet:\t\t%(alphabet)s" % {'alphabet':self.alphabet})
         print("FA classification:\t\t%(classification)s" %{'classification':self.valid})
         print("FA classification reason:\t\t%(class_reason)s" %{'class_reason':self.valid_reason})
+        print("epsilon-Transition functions: %(eps)s" %{'eps':str(self.epsilon_trans)})
         print("\n\n\n")
     # end def print_self(self)
 
@@ -476,8 +555,10 @@ class FA:
         self.fa_type()              # What is the FA type?
         self.set_alphabet()         # What symbols are in the alphabet
         self.set_states()
-        self.current_state = '0'      # after processing reset the current state
-        # self.print_self()
+        self.current_state = '0'    # after processing reset the current state
+        self.get_dupe_set()         # create a set of all the duplicates
+        if( len(self.epsilon_trans) > 0):
+            self.print_self()
     # end def process_def(self,filename)
 
 
@@ -491,6 +572,14 @@ class FA:
     # \fn def process_string(self,filename)
     # \purpose when given a string take the following actions
     # \param in_string string to be tested against FA definition
+    # \ description Check if processing the empty string would result in success,
+    #               if yes cease processing.
+    #               Check that the final symbol in the string would lead to an
+    #               accept state, cease processing if not.
+    #               Check that the input string is in the acceptable alphabet,
+    #               cease processing if not.
+    #               Else advance through the states with next_state(symbol)
+    #               and check that we're at an accept state after
     def process_string(self,in_string):
         self.strings_processed += 1 # update number of strings processed
         temp = in_string                # save a copy of the string for manip
@@ -499,6 +588,7 @@ class FA:
         # If in_string is empty string and accept states are null
         if( self.check_empty_string_accept(in_string) ):
             self.accepted_strings.append(in_string)
+            return None
 
 
         # if the final symbol doesn't lead to an accept state stop processing, go to trap
@@ -515,10 +605,10 @@ class FA:
         # if the string doesn't immediately fail run it through the machine
         else:
             # Process the string to the final character
-            while( temp ):
-                self.next_state(temp[0])
-                temp = temp[1:]
-
+            #while( temp ):
+            #    self.next_state(temp[0])
+            #    temp = temp[1:]
+            self.next_state_recurse(temp)
             # if the current_state is in the accept states then string_accepted
             #print("%(name)s has states %(st)s" %{'name':self.from_file, 'st':self.states})
             if( self.current_state in self.accept_states):
