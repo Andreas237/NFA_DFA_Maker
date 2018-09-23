@@ -1,3 +1,10 @@
+# Running the code
+? What do I need to run it?
+? What directory is it in?
+? What is the file to execute, what inputs?
+? Where does everything happen?
+? What are the other files
+
 # NFA_DFA_Maker
 Finite Automaton creator and classifier based on PJ01.pdf
 

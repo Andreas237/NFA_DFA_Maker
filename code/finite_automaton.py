@@ -213,6 +213,7 @@ class FA:
 
 
 
+
     # \fn def check_dupe_tranisitons(self)
     # Return 1 if there is a duplicate value in the list of (current_state, symbol)
     def check_dupe_tranisitons(self):
@@ -468,28 +469,9 @@ class FA:
 
 
 
-    # \fn def next_state(self,in_char)
-    # \purpose
-    #   Advance the machine's current state based on the character input and
-    #   the current state
-    def next_state(self,in_char):
-        # for each transition in the table, if the t[0] == current state
-        for transition in self.transition_table:
-            if self.current_state == transition[0]:
-                if transition[1] == in_char :
-                    self.current_state = transition[2]
-                    return None
-            # if t[1] == in_char then set the current_state to t[2]
-    # end def next_state(self,in_char)
-
-
-
-
-
-
     # \fn def next_state_recurse(self,in_char)
     def next_state_recurse(self,in_str):
-
+    #def next_state_recurse(self,in_str):
         # find the transition with the same state and symbol, then set the
         # the current state and call again
         if( len(in_str) - 1):
@@ -498,28 +480,10 @@ class FA:
                     if transition[1] == in_str[0] :
                         self.current_state = transition[2]
                         break
-            print("In next_state_recurse with " + in_str)
-            self.next_state_recurse(in_str[1:])
+            return self.next_state_recurse(in_str[1:])
         else:
-            print("In next_state_recurse returning none")
-            return None
+            return 1
     # end def next_state_recurse(self,in_char)
-
-
-
-
-
-
-    # \fn def next_state_check(self,in_char)
-    # \brief get epsilon-transitions functions associated with in_char
-    def next_state_check(self,in_char):
-        if( len(self.epsilon_trans) > 0 ):
-            dupes = []
-            for i in self.epsilon_trans:
-                if i[1] == in_char:
-                    dupes.append(i)
-        return dupes
-    # end def next_state_check(self,in_char)
 
 
 
@@ -557,8 +521,6 @@ class FA:
         self.set_states()
         self.current_state = '0'    # after processing reset the current state
         self.get_dupe_set()         # create a set of all the duplicates
-        if( len(self.epsilon_trans) > 0):
-            self.print_self()
     # end def process_def(self,filename)
 
 
@@ -578,7 +540,7 @@ class FA:
     #               accept state, cease processing if not.
     #               Check that the input string is in the acceptable alphabet,
     #               cease processing if not.
-    #               Else advance through the states with next_state(symbol)
+    #               Else advance through the states with next_state_recurse(symbol)
     #               and check that we're at an accept state after
     def process_string(self,in_string):
         self.strings_processed += 1 # update number of strings processed
@@ -605,14 +567,9 @@ class FA:
         # if the string doesn't immediately fail run it through the machine
         else:
             # Process the string to the final character
-            #while( temp ):
-            #    self.next_state(temp[0])
-            #    temp = temp[1:]
-            self.next_state_recurse(temp)
-            # if the current_state is in the accept states then string_accepted
-            #print("%(name)s has states %(st)s" %{'name':self.from_file, 'st':self.states})
-            if( self.current_state in self.accept_states):
-                self.accepted_strings.append(in_string)
+            if( self.next_state_recurse(temp) ):
+                if( self.current_state in self.accept_states):
+                    self.accepted_strings.append(in_string)
             # else string_rejected
 
     # end def process_string
@@ -682,20 +639,6 @@ class FA:
     def set_transition(self,delta:tuple):
         self.transition_table.add(delta)
     # end def set_transition(self,delta:tuple)
-
-
-
-
-
-
-
-
-    # \fn def test_finalize(self)
-    # \brief Print to console what should be finalized
-    def test_finalize(self):
-        print("Valid: %(valid)s\nStates: %(states)d\nAlphabet: %(alp)s\nAccepted Strings: %(acc)s" %{'valid':self.valid, 'states': len(self.states), 'alp':str(self.alphabet),'acc':str(self.accepted_strings)})
-
-    # end def test_finalize(self)
 
 
 

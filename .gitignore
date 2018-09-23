@@ -1,4 +1,4 @@
 #ignore
 __pycache__/
 *.pyc
-Output_files/
+#test_finite_automaton.py

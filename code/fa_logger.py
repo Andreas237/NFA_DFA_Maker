@@ -75,7 +75,6 @@ class FA_Logger:
                 os.mknod(self.txt,mode=666)
 
             f = open(self.txt, 'w')
-
             for s in FA.get_accepted_strings():
                 f.write(s + '\n')
         except PermissionError:
@@ -97,6 +96,7 @@ class FA_Logger:
     # \purpose takes an FA and creates a file with the specified format
     def log_FA(self,FA):
         self.set_filenames(FA.from_file)
+
         self.remove_previous_files()
         self.create_log_file(FA)
         self.create_txt_file(FA)
@@ -131,9 +131,13 @@ class FA_Logger:
     # \fn def set_filenames(self,filename)
     # set the names of the files we will use
     def set_filenames(self,filename):
-        self.basename = filename.replace('.fa','')
-        self.basename = self.basename[ self.basename.find("/") + 1 : ]
-        self.basename = "Output_files/" + self.basename
+        index = filename.find('m')
+        self.basename = filename[index:].replace('.fa','')
+        #self.basename = self.basename[ self.basename.find("/") + 1 : ]
+        #self.basename = "Output_files/" + self.basename
+        if( not os.path.exists("../results/")):
+            os.makedirs("../results/")
+        self.basename = "../results/" + self.basename
         self.logfile = self.basename + '.log'
         self.txt = self.basename + '.txt'
     # end # \fn def set_filenames(self,filename)
