@@ -12,6 +12,8 @@ Date: 23 September 2018
 
 
 ## Knowing the the files
+Please see *_./html/index.html_* for Doxygen generation. It is complete documentation.
+
 Functions are listed in the order they are called.
 
 ### fa_master.py
