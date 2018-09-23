@@ -1,6 +1,5 @@
 import os
 import sys  # determine platform for directory operations
-#   "States: " number of states in the FA, plus state 255
 ##################################################################################
 # CLASS: FA_Logger
 ##################################################################################
@@ -39,8 +38,8 @@ class FA_Logger:
                 os.mknod(self.logfile,mode=666)
 
             f = open(self.logfile, 'w')
-
-            f.write( 'Valid: ' + FA.get_valid() + '\n')
+            valid = FA.get_valid()
+            f.write( 'Valid: ' + valid + '\n')
 
             f.write( 'States: ' + str(len(FA.get_states())) + '\n')
 
@@ -48,8 +47,12 @@ class FA_Logger:
             for i in FA.get_alphabet():
                 tmp = tmp + i
             f.write( 'Alphabet: ' + tmp + '\n' )
+            # If invalid log 0/0
+            if(valid == 'INVALID'):
+                f.write('Accepted Strings: 0 / 0\n')
+            else:
+                f.write('Accepted Strings: ' + str(len(FA.get_accepted_strings())) + '/'+ str(FA.get_strings_processed()) + '\n')
 
-            f.write('Accepted Strings: ' + str(len(FA.get_accepted_strings())) + '/'+ str(FA.get_strings_processed()) + '\n')
         except PermissionError:
             print("Couldn't open %(f)s for logging" % {'f':self.logfile} )
 
@@ -96,7 +99,6 @@ class FA_Logger:
     # \purpose takes an FA and creates a file with the specified format
     def log_FA(self,FA):
         self.set_filenames(FA.from_file)
-
         self.remove_previous_files()
         self.create_log_file(FA)
         self.create_txt_file(FA)

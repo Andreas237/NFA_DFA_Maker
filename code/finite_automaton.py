@@ -543,7 +543,7 @@ class FA:
     #               Else advance through the states with next_state_recurse(symbol)
     #               and check that we're at an accept state after
     def process_string(self,in_string):
-        self.strings_processed += 1 # update number of strings processed
+        self.strings_processed += 1     # update number of strings processed
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
@@ -551,7 +551,8 @@ class FA:
         if( self.valid == 'INVALID'):
             return None
 
-        # If in_string is empty string and accept states are null
+        # If in_string is empty string and accept states are null accept and
+        # quit processing
         elif( self.check_empty_string_accept(in_string) ):
             self.accepted_strings.append(in_string)
             return None

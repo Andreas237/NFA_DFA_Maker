@@ -135,7 +135,10 @@ class FA_Master:
     # \fn def run(self):
     # \brief builds the FAs, get the input strings, try all strings in all FAs
     def run(self):
+        # START tracks the beginning of the process
         start = time.time()
+
+        #
         self.build_fas()
 
 
@@ -146,17 +149,23 @@ class FA_Master:
 
 
 
-
+        # TOTAL  and COUNT used for the progress bar
         total = len(self.fa_list)*len(self.in_strings)
         count = 0
+
+
+        # For each FA in self.fa_list pass it all the strings extracted from
+        # input.txt
         print("Running input strings through FAs:")
         for fai in range(len(self.fa_list)):
             for ts in range(len(self.in_strings)):
-                count += 1
-                loadingBar(count,total,1)
+                count += 1                  # used for loadingBar
+                loadingBar(count,total,1)   # so you know the program hasn't frozen
                 self.fa_list[fai].process_string(self.in_strings[ts])
+            # Finalize executes logging
             self.fa_list[fai].finalize_fa()
         print()
+        # Print the total execution time to the CLI
         print("Execution time= {0:.5f}".format(time.time() - start))
     # end def run(self)
 
