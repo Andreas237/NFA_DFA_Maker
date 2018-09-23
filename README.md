@@ -1,7 +1,28 @@
 # Running the code
-? What do I need to run it?
-? What directory is it in?
-? What is the file to execute, what inputs?
+System Requirements:
+    Unix based OS
+    Python 3.x
+    Tested on OSX 10.13.4; Kali Gnu/Linux Rolling
+
+## Knowing the the files
+
+### PJ01/code/fa_master.py
+Master script. Reads directories and passes definition files to FA constructor
+and string processor
+* run(self) calls sub-functions
+  * build_fas(self) calls sub-function to scan directory for .fa files, then
+    passes those to the FA constructor.
+  * get_input_strings(self,input_file) creates an iterable list of all strings
+    from _input.txt_
+  * Run then calls on each FA to `<process_string()>`
+
+### PJ01/code/finite_automaton.py
+Implementation of NFA.  DFA functionality handled the same as the NFA, except
+strings containing epsilon transitions aren't processed.
+*
+  - PJ01/cleanup.sh: cleans residual files from PJ01/results
+
+
 ? Where does everything happen?
 ? What are the other files
 

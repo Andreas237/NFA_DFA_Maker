@@ -547,10 +547,19 @@ class FA:
         temp = in_string                # save a copy of the string for manip
         self.current_state = '0'        # Be sure to start from the start state
 
+        # If the NFA is invalid cease processing
+        if( self.valid == 'INVALID'):
+            return None
+
         # If in_string is empty string and accept states are null
-        if( self.check_empty_string_accept(in_string) ):
+        elif( self.check_empty_string_accept(in_string) ):
             self.accepted_strings.append(in_string)
             return None
+
+        # If this is a DFA and there are epsilon tranisition don't process the string
+        elif( self.valid == 'DFA'):
+            if( '`' in self.alphabet ):
+                return None
 
 
         # if the final symbol doesn't lead to an accept state stop processing, go to trap
